@@ -1,0 +1,14 @@
+{
+  "name": "01-o-que-e-o-expressjs-e-npm",
+  "version": "1.0.0",
+  "description": "Iniciando com o express",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hugo da Rocha Brandão",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
