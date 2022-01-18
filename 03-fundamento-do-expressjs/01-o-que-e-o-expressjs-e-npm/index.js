@@ -18,8 +18,16 @@ app.get("/blog", function(requisicao, resposta) {
 	resposta.send("<h2>Bem vindo ao meu blog.</h2>")
 })
 
+// As query params não são declaradas na rota, mas sim na URL de acesso.
 app.get("/canal/youtube", function(requisicao, resposta) {
-	resposta.send("<h3>Bem vindo ao meu canal no youtube.</h3>")
+	let canal = requisicao.query["canal"]
+	let texto = ''
+	if (canal) {
+		texto = `Bem vindo ao meu canal no youtube ${ canal }.`
+	} else {
+		texto = `Eu tenho um canal no youtube.`
+	}
+	resposta.send(texto)
 })
 
 app.get("/usuario/:nome/:empresa/:cargo?", function(req, res) {
