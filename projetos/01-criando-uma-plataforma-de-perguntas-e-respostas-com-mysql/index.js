@@ -9,6 +9,10 @@ app.get("/", (req, res) => {
 	res.render("index")
 })
 
+app.get("/perguntar", (req, res) => {
+	res.render("perguntar")
+})
+
 app.listen(4000, erro => {
 	if (erro) {
 		console.error("Erro durante a inicialização do servidor.")
