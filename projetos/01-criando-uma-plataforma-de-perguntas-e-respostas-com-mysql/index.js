@@ -8,11 +8,27 @@ app.get("/:nome/:lang", (req, res) => {
 	let nome = req.params.nome
 	let lang = req.params.lang
 	let mostrarMensagem = true
+
+	let produtos = [
+		{
+			nome: "Cachorro Quente",
+			preco: 15
+		}, {
+			nome: "Hamburguer",
+			preco: 20
+		},
+		{
+			nome: "Pizza",
+			preco: 40
+		}
+	]
+
 	res.render("index", {
 		nome: nome,
 		lang: lang,
 		profissao: "Desenvolvedor Web",
-		mostrarMensagem: mostrarMensagem
+		mostrarMensagem: mostrarMensagem,
+		produtos: produtos
 	})
 })
 

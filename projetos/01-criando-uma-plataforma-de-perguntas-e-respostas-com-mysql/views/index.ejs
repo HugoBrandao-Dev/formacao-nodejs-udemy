@@ -19,5 +19,11 @@
 		<% } else { %>
 			<p>A mensagem é um SEGREDO :O</p>
 		<% } %>
+
+		<ol>
+			<% produtos.forEach(produto => { %>
+				<li><%= produto.nome %> = <%= produto.preco.toLocaleString('pt-BR', {style:"currency", currency:"BRL"}) %></li>
+			<% }) %>
+		</ol>
 	</body>
 </html>
