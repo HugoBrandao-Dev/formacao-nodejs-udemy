@@ -3,6 +3,7 @@ const app = express()
 
 // Informa que o view engine, com que o Express irá trabalhar, será o EJS.
 app.set("view engine", "ejs")
+app.use(express.static("public"))
 
 app.get("/:nome/:lang", (req, res) => {
 	let nome = req.params.nome
