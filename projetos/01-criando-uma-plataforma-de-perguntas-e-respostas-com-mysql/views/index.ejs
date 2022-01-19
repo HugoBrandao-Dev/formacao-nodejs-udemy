@@ -8,25 +8,6 @@
 		<title>Guia perguntas</title>
 	</head>
 	<body>
-		<h1>Guia perguntas!</h1>
-		<hr>
-		<h3>Lista de perguntas</h3>
-		<p>Nome: <%= nome %></p>
-		<p>Linguagem favorita: <%= lang %></p>
-		<p>Profissão: <%= profissao %> </p>
-
-		<% if (mostrarMensagem) { %>
-			<p>:) Tobias é esposo de Dinorá :)</p>
-		<% } else { %>
-			<p>A mensagem é um SEGREDO :O</p>
-		<% } %>
-
-		<ol>
-			<% produtos.forEach(produto => { %>
-				<li><%= produto.nome %> = <%= produto.preco.toLocaleString('pt-BR', {style:"currency", currency:"BRL"}) %></li>
-			<% }) %>
-		</ol>
-
-		<img src="/img/montanhas.jpg" alt="Imagens de montanhas com névoas." title="Montanhas névoas.">
+		
 	</body>
 </html>
