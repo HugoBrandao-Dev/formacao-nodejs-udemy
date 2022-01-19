@@ -13,5 +13,11 @@
 		<p>Nome: <%= nome %></p>
 		<p>Linguagem favorita: <%= lang %></p>
 		<p>Profissão: <%= profissao %> </p>
+
+		<% if (mostrarMensagem) { %>
+			<p>:) Tobias é esposo de Dinorá :)</p>
+		<% } else { %>
+			<p>A mensagem é um SEGREDO :O</p>
+		<% } %>
 	</body>
 </html>
