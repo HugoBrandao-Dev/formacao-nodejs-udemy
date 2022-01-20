@@ -3,6 +3,9 @@ const app = express()
 const bodyParser = require("body-parser")
 const connection = require("./database/database")
 
+// Só de estar aqui, já vai criar a tabela no banco de dados.
+const perguntaModel = require("./database/Pergunta")
+
 // Database
 connection.authenticate()
 	.then(() => {
