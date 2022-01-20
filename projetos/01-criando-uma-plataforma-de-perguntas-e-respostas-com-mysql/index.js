@@ -1,6 +1,16 @@
 const express = require("express")
 const app = express()
 const bodyParser = require("body-parser")
+const connection = require("./database/database")
+
+// Database
+connection.authenticate()
+	.then(() => {
+		console.log("O Banco de Dados foi conectado com SUCESSO.")
+	})
+	.catch(erro => {
+		console.log(erro)
+	})
 
 // Informa que o view engine, com que o Express irá trabalhar, será o EJS.
 app.set("view engine", "ejs")
