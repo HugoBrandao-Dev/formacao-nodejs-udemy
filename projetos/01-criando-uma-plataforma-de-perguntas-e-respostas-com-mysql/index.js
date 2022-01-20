@@ -4,7 +4,7 @@ const bodyParser = require("body-parser")
 const connection = require("./database/database")
 
 // Só de estar aqui, já vai criar a tabela no banco de dados.
-const perguntaModel = require("./database/Pergunta")
+const Perguntas = require("./database/Pergunta")
 
 // Database
 connection.authenticate()
@@ -35,7 +35,11 @@ app.get("/perguntar", (req, res) => {
 app.post("/salvarPergunta", (req, res) => {
 	let titulo = req.body["ipt-titulo"]
 	let descricao = req.body["txt-descricao"]
-	res.send(`<strong>Título: </strong>${ titulo }<br><strong>Descrição: </strong>${ descricao }`)
+	Perguntas.create({
+		titulo: titulo,
+		descricao: descricao
+		// Em caso de sucesso, rediciona o usuário para página inicial.
+	}).then(() => { res.redirect("/") })
 })
 
 app.listen(4000, erro => {
