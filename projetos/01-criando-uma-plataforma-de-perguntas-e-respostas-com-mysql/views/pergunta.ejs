@@ -21,6 +21,16 @@
 			<br>
 			<button class="btn btn-primary">Responder</button>
 		</form>
+		<hr>
+		<h3>Respostas</h3>
+		<% respostas.forEach(resposta => { %>
+			<br>
+			<div class="card">
+				<div class="card-body">
+					<%= resposta.corpo %>
+				</div>
+			</div>
+		<% }) %>
 	</div>
 </body>
 <%- include ("partials/footer.ejs") %>

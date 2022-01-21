@@ -79,7 +79,25 @@ app.get("/pergunta/:id", (req, res) => {
 	*/
 	}).then(pergunta => {
 		if (pergunta) {
-			res.render("pergunta", { pergunta : pergunta })
+
+			// Busca por respostas da pergunta encontrada
+			Resposta.findAll({
+				where: {
+					pergunta_id: pergunta.id
+				},
+				order: [
+					["id", "DESC"]
+				]
+			/*
+			Caso a pergunta não tenha resposta, retornará um 
+			ARRAY VAZIO, sem ocorrer problema algum.
+			*/ 
+			}).then(respostas => {
+				res.render("pergunta", {
+					pergunta: pergunta,
+					respostas: respostas
+				})
+			})
 		} else {
 			res.redirect("/")
 		}
