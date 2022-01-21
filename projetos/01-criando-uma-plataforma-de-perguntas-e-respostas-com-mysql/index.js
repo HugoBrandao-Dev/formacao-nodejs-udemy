@@ -3,8 +3,10 @@ const app = express()
 const bodyParser = require("body-parser")
 const connection = require("./database/database")
 
+// Models
 // Só de estar aqui, já vai criar a tabela no banco de dados.
-const Perguntas = require("./database/Pergunta")
+const Pergunta = require("./database/Pergunta")
+const Resposta = require("./database/Resposta")
 
 // Database
 connection.authenticate()
@@ -30,7 +32,7 @@ app.get("/", (req, res) => {
 	Lista todas as pergutas da tabela "perguntas", mas só traz as informações
 	"cruas" (raw), ou "importantes".
 	*/
-	Perguntas.findAll({
+	Pergunta.findAll({
 		raw: true,
 		/*
 		Faz com que o resultado seja ordenado com base no id, e de forma 
@@ -56,7 +58,7 @@ app.post("/salvarPergunta", (req, res) => {
 	let descricao = req.body["txt-descricao"]
 
 	// Cria um novo registro no tabela perguntas
-	Perguntas.create({
+	Pergunta.create({
 		titulo: titulo,
 		descricao: descricao
 		// Em caso de sucesso, rediciona o usuário para página inicial.
@@ -66,7 +68,7 @@ app.post("/salvarPergunta", (req, res) => {
 app.get("/pergunta/:id", (req, res) => {
 	let id = req.params.id
 	// Faz a busca pela primeira correspondência
-	Perguntas.findOne({
+	Pergunta.findOne({
 		where: {
 			// [CAMPO DE BUSCA]: [VALOR PARA SER BUSCADO]
 			id: id
