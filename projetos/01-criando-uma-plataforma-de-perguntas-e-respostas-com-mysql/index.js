@@ -86,6 +86,18 @@ app.get("/pergunta/:id", (req, res) => {
 	})
 })
 
+app.post("/salvarResposta", (req, res) => {
+
+	// Requisições do tipo POST enviam os dados dentro do corpo (body).
+	let corpo = req.body["txt-resposta"]
+	let pergunta_id = req.body["ipt-pergunta-id"]
+
+	Resposta.create({
+		corpo: corpo,
+		pergunta_id: pergunta_id
+	}).then(() => res.redirect(`/pergunta/${ pergunta_id }`))
+})
+
 app.listen(4000, erro => {
 	if (erro) {
 		console.error("Erro durante a inicialização do servidor.")

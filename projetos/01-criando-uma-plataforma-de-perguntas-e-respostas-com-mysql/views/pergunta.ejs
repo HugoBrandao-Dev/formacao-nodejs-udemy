@@ -14,8 +14,8 @@
 		</div>
 		<br>
 		<h4>Responda</h4>
-		<form>
-			<input type="hidden" name="num_id" value="<%= pergunta.id %>">
+		<form method="POST" action="/salvarResposta">
+			<input type="hidden" name="ipt-pergunta-id" value="<%= pergunta.id %>">
 			<label>Resposta</label>
 			<textarea name="txt-resposta" placeholder="Digite sua resposta" class="form-control"></textarea>
 			<br>
