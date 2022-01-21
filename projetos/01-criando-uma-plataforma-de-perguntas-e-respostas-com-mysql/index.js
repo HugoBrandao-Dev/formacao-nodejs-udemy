@@ -42,7 +42,6 @@ app.get("/", (req, res) => {
 			["id", "DESC"]
 		]
 	}).then(perguntas => {
-			console.log(perguntas)
 			// Renderiza index passando perguntas como parâmetros.
 			res.render("index", { perguntas: perguntas })
 		})
@@ -62,6 +61,27 @@ app.post("/salvarPergunta", (req, res) => {
 		descricao: descricao
 		// Em caso de sucesso, rediciona o usuário para página inicial.
 	}).then(() => { res.redirect("/") })
+})
+
+app.get("/pergunta/:id", (req, res) => {
+	let id = req.params.id
+	// Faz a busca pela primeira correspondência
+	Perguntas.findOne({
+		where: {
+			// [CAMPO DE BUSCA]: [VALOR PARA SER BUSCADO]
+			id: id
+		}
+	/*
+	Caso não haja correspondência, será retornado undefined,
+	mas NÃO DARÁ ERRO (não é capturado pelo catch).
+	*/
+	}).then(pergunta => {
+		if (pergunta) {
+			res.render("pergunta", { pergunta : pergunta })
+		} else {
+			res.redirect("/")
+		}
+	})
 })
 
 app.listen(4000, erro => {
