@@ -30,8 +30,18 @@ app.get("/", (req, res) => {
 	Lista todas as pergutas da tabela "perguntas", mas só traz as informações
 	"cruas" (raw), ou "importantes".
 	*/
-	Perguntas.findAll({ raw: true })
-		.then(perguntas => {
+	Perguntas.findAll({
+		raw: true,
+		/*
+		Faz com que o resultado seja ordenado com base no id, e de forma 
+		decrescente. Também faz ordenação alfabética.
+		ASC = Crescente
+		OBS: VEJA QUE É UM ARRAY DENTRO DO OUTRO
+		*/
+		order: [
+			["id", "DESC"]
+		]
+	}).then(perguntas => {
 			console.log(perguntas)
 			// Renderiza index passando perguntas como parâmetros.
 			res.render("index", { perguntas: perguntas })
