@@ -10,6 +10,12 @@ const bodyParser = require("body-parser")
 // Conexão com o banco de dados
 const connection = require("./database/database")
 
+// Categories
+const categoriesController = require("./categories/categoriesController")
+
+// Articles
+const articlesController = require("./articles/articleController")
+
 /* ########## CONFIGURAÇÕES ########## */
 
 // Configurando a view engine do express para usar EJS
@@ -30,6 +36,15 @@ connection.authenticate()
 	.catch(error => {
 		console.log(error)
 	})
+
+/*
+Utiliza categories na rota
+"/" significa SEM PREFIXO
+*/
+app.use("/", categoriesController)
+
+// Utilia articles na rota
+app.use("/", articlesController)
 
 /* ########## ROTAS ########## */
 
