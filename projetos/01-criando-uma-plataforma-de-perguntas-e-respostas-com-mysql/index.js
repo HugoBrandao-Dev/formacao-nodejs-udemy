@@ -25,7 +25,17 @@ app.use(bodyParser.urlencoded({extended: false}))
 
 // Rotas
 app.get("/", (req, res) => {
-	res.render("index")
+
+	/*
+	Lista todas as pergutas da tabela "perguntas", mas só traz as informações
+	"cruas" (raw), ou "importantes".
+	*/
+	Perguntas.findAll({ raw: true })
+		.then(perguntas => {
+			console.log(perguntas)
+			// Renderiza index passando perguntas como parâmetros.
+			res.render("index", { perguntas: perguntas })
+		})
 })
 
 app.get("/perguntar", (req, res) => {
@@ -35,6 +45,8 @@ app.get("/perguntar", (req, res) => {
 app.post("/salvarPergunta", (req, res) => {
 	let titulo = req.body["ipt-titulo"]
 	let descricao = req.body["txt-descricao"]
+
+	// Cria um novo registro no tabela perguntas
 	Perguntas.create({
 		titulo: titulo,
 		descricao: descricao
