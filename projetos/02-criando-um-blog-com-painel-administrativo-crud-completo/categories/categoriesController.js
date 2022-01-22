@@ -11,7 +11,7 @@ router.get("/categories", (req, res) => {
 })
 
 router.get("/admin/categories/new", (req, res) => {
-	res.send("Rota para criar uma nova Categorie.")
+	res.render("admin/categories/new")
 })
 
 module.exports = router
