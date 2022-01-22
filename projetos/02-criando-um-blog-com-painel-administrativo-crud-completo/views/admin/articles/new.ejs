@@ -13,7 +13,8 @@
 						<label>Título:</label>
 						<input type="text" class="form-control" name="ipt-titulo" placeholder="Defina o título do artigo">
 						<br>
-						<textarea name="txt-article" class="form-control" placeholder="Escreva seu artigo aqui"></textarea>
+						<textarea id="txt-article" name="txt-article" class="form-control" rows="15" placeholder="Escreva seu artigo aqui"></textarea>
+						<br>
 						<button class="btn btn-success">Cadastrar</button>
 					</form>
 				</div>
@@ -23,3 +24,15 @@
 
 <!-- Precisa voltar os diretórios para achar a pasta "partials" -->
 <%- include ("../../partials/footer.ejs") %>
+
+<!-- TinyMCE para edição de textos -->
+<script src="/tinymce/tinymce.min.js"></script>
+<script>
+	tinymce.init({
+		// Qual o ID do textarea que queremos que seja customizado pelo TinyMCE
+		selector: "#txt-article",
+		plugins: [
+			"advlist autolink link image print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons"
+		]
+	})
+</script>
