@@ -62,4 +62,44 @@ router.post("/categories/delete", (req, res) => {
 	}
 })
 
+router.get("/admin/categories/edit/:id", (req, res) => {
+	let id = req.params.id
+
+	if (isNaN(id)) {
+		res.redirect("/admin/categories")
+	}
+
+	// Perquisa uma pouco MAIS RÁPIDA para elementos que são id (primary key, neste caso).
+	Category.findByPk(id)
+		.then(category => {
+			if (category) {
+				res.render("admin/categories/edit", { category: category })
+			} else {
+				router.redirect("/admin/categories")
+			}
+		})
+		.catch(error => {
+			console.log(error)
+			router.redirect("/admin/categories")
+		})
+})
+
+router.post("/categories/update", (req, res) => {
+	let id = req.body["ipt-id"]
+	let title = req.body["ipt-title"]
+
+	// Realiza a atualização de um registro no banco de dados, baseado no seu ID.
+	Category.update(
+		{
+			title: title,
+			slug: slugify(title)
+		},
+		{where:
+			{id: id}
+		}
+	).then(() => {
+		res.redirect("/admin/categories")
+	})
+})
+
 module.exports = router
