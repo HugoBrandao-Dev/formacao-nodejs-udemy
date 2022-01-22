@@ -2,7 +2,7 @@ const express = require("express")
 
 /*
 Com a utilização do router, o express detecta automaticamente
-que este aquivo se trata de uma arquito de rota.
+que este arquivo se trata de uma arquito de rota.
 */
 const router = express.Router()
 
