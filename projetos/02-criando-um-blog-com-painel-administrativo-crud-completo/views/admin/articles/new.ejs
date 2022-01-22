@@ -1,0 +1,25 @@
+<!-- Precisa voltar os diretórios para achar a pasta "partials" -->
+<%- include ("../../partials/header.ejs") %>
+	<body>
+		<%- include ("../../partials/navbar.ejs") %>
+		<div class="container">
+			<br>
+			<div class="card">
+				<div class="card-header">
+					<h2>Novo artigo</h2>
+				</div>
+				<div class="card-body">
+					<form method="POST" action="/categories/save">
+						<label>Título:</label>
+						<input type="text" class="form-control" name="ipt-titulo" placeholder="Defina o título do artigo">
+						<br>
+						<textarea name="txt-article" class="form-control" placeholder="Escreva seu artigo aqui"></textarea>
+						<button class="btn btn-success">Cadastrar</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+
+<!-- Precisa voltar os diretórios para achar a pasta "partials" -->
+<%- include ("../../partials/footer.ejs") %>
