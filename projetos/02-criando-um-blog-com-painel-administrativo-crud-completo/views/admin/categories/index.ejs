@@ -5,7 +5,7 @@
 		<hr>
 		<h2>Categorias</h2>
 		<br>
-		<a href="/admin/categories/new" class="btn btn-success">Nova categoria</a>
+		<a href="/admin/categories/new" class="btn btn-outline-success">Nova categoria</a>
 		<hr>
 		<table class="table table-bordered">
 			<thead>
@@ -22,7 +22,10 @@
 						<td><%= categorie.id %></td>
 						<td><%= categorie.title %></td>
 						<td><%= categorie.slug %></td>
-						<td>asdf</td>
+						<td>
+							<button class="btn btn-warning">Editar</button>
+							<button class="btn btn-danger">Deletar</button>
+						</td>
 					</tr>
 				<% }) %>
 			</tbody>
