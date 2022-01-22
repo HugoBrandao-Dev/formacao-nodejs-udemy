@@ -42,4 +42,24 @@ router.get("/admin/categories", (req, res) => {
 	})
 })
 
+router.post("/categories/delete", (req, res) => {
+	let id = req.body["ipt-id"]
+	if (id) {
+		if (!isNaN(id)) {
+				// Método para deletar um registro do banco de dados
+				Category.destroy({
+					where: {
+						id: id
+					}
+				}).then(() => {
+					res.redirect("/admin/categories")
+				})
+		} else { // Se não foi um número
+			res.redirect("/admin/categories")
+		}
+	} else { // Se for Null
+		res.redirect("/admin/categories")
+	}
+})
+
 module.exports = router

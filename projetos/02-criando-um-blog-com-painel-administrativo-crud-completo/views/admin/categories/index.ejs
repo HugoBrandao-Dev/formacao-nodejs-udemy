@@ -17,14 +17,24 @@
 				</tr>
 			</thead>
 			<tbody>
-				<% categories.forEach(categorie => { %>
+				<% categories.forEach(category => { %>
 					<tr>
-						<td><%= categorie.id %></td>
-						<td><%= categorie.title %></td>
-						<td><%= categorie.slug %></td>
+						<td><%= category.id %></td>
+						<td><%= category.title %></td>
+						<td><%= category.slug %></td>
 						<td>
 							<button class="btn btn-warning">Editar</button>
-							<button class="btn btn-danger">Deletar</button>
+
+							<!-- 
+								Esse form serve para que possamos enviar um id do registro a ser deletado.
+								O onsubmit servirá para prevenirmos uma deleção acidental de um registro, 
+								mostrando um confirm para o usuário.
+							-->
+							<form method="POST" action="/categories/delete" class="d-inline" onsubmit="isDeletarRegistro(event, '<%= category.id %>', this)">
+								<!-- Se utilizar o disabled, o value sempre será undefined -->
+								<input type="hidden" name="ipt-id" value="<%= category.id %>">
+								<button class="btn btn-danger">Deletar</button>
+							</form>
 						</td>
 					</tr>
 				<% }) %>
@@ -33,3 +43,13 @@
 	</div>
 </body>
 <%- include ("../../partials/footer.ejs") %>
+
+<script>
+	// Intercepta uma deleção, esperando uma confirmação ou negação do usuário.
+	function isDeletarRegistro(event, id, form) {
+		event.preventDefault()
+		if(confirm(`Você quer deletar o registro de ID = ${ id }?`)) {
+			form.submit()
+		}
+	}
+</script>
