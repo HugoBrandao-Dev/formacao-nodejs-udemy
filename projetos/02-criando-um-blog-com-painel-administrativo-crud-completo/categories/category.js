@@ -16,4 +16,14 @@ const Category = connection.define("categories", {
 	}
 })
 
+/*
+Força a criação de uma tabela. Foi usada aqui porque
+uma tabela foi criada antes de definirmos o relacionamento
+entre dela com outra tabela (por causa do nodemon). Sendo assim, usamos o sync somente
+uma vez e depois podemos apagar ou comentar.
+
+
+Category.sync({ force: true })
+*/
+
 module.exports = Category

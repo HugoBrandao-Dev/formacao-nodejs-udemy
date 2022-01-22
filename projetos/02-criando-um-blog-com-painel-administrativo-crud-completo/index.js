@@ -12,9 +12,11 @@ const connection = require("./database/database")
 
 // Categories
 const categoriesController = require("./categories/categoriesController")
+const categoryModel = require("./categories/category")
 
 // Articles
 const articlesController = require("./articles/articleController")
+const articleModel = require("./articles/article")
 
 /* ########## CONFIGURAÇÕES ########## */
 
