@@ -11,11 +11,11 @@
 				<div class="card-body">
 					<form method="POST" action="/categories/save">
 						<label>Título:</label>
-						<input type="text" class="form-control" name="ipt-titulo" placeholder="Defina o título do artigo">
+						<input type="text" class="form-control" name="ipt-title" placeholder="Defina o título do artigo">
 						<br>
-						<textarea id="txt-article" name="txt-article" class="form-control" rows="15" placeholder="Escreva seu artigo aqui"></textarea>
+						<textarea id="txt-article" name="txt-body" class="form-control" rows="15" placeholder="Escreva seu artigo aqui"></textarea>
 						<label>Categoria</label>
-						<select name="category" class="form-control">
+						<select name="slt-category" class="form-control">
 							<% categories.forEach(category => { %>
 								<option value="<%= category.id %>"><%= category.title %></option>>
 							<% }) %>
