@@ -23,7 +23,8 @@
 						<td><%= article.id %></td>
 						<td><%= article.title %></td>
 						<td><%= article.slug %></td>
-						<td><%= article.categoryId %></td>
+						<!-- Pega o título da categoria do artigo, possível graças ao JOIN feito na rota -->
+						<td><%= article.category.title %></td>
 						<td>
 							<a href="#" class="btn btn-warning">Editar</a>
 							<button type="button" class="btn btn-danger">Deletar</button>

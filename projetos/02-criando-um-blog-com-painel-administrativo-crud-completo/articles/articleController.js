@@ -5,7 +5,11 @@ const Article = require("./article")
 const slugify = require("slugify")
 
 router.get("/admin/articles", (req, res) => {
-	Article.findAll({})
+	/*
+	Permite que haja um join entre a tabela categories e a articles,
+	devido a tabela articles ter uma Foreign Key vinda do categories
+	*/
+	Article.findAll({ include: [{ model: Category }] })
 		.then(articles => {
 			res.render("admin/articles/index", { articles: articles })
 		})
