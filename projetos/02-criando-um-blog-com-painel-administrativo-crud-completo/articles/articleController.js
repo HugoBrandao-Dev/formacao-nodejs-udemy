@@ -2,11 +2,13 @@ const express = require("express")
 const router = express.Router()
 const Category = require("../categories/category")
 const Article = require("./article")
-const sligify = require("slugify")
-const { default: slugify } = require("slugify")
+const slugify = require("slugify")
 
 router.get("/admin/articles", (req, res) => {
-	res.render("admin/articles/index")
+	Article.findAll({})
+		.then(articles => {
+			res.render("admin/articles/index", { articles: articles })
+		})
 })
 
 router.get("/admin/articles/new", (req, res) => {
