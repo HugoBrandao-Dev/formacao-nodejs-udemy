@@ -6,7 +6,7 @@ const sligify = require("slugify")
 const { default: slugify } = require("slugify")
 
 router.get("/admin/articles", (req, res) => {
-	res.send("Rota para articles")
+	res.render("admin/articles/index")
 })
 
 router.get("/admin/articles/new", (req, res) => {

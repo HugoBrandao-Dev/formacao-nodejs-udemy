@@ -1,0 +1,36 @@
+<%- include ("../../partials/header.ejs") %>
+<body>
+	<%- include ("../../partials/navbar.ejs") %>
+	<div class="container">
+		<hr>
+		<h2>Artigos</h2>
+		<br>
+		<a href="/admin/articles/new" class="btn btn-outline-success">Novo artigo</a>
+		<hr>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Título</th>
+					<th>Slug</th>
+					<th>Categoria</th>
+					<th>Ações</th>
+				</tr>
+			</thead>
+			<tbody>
+				
+			</tbody>
+		</table>
+	</div>
+</body>
+<%- include ("../../partials/footer.ejs") %>
+
+<script>
+	// Intercepta uma deleção, esperando uma confirmação ou negação do usuário.
+	function isDeletarRegistro(event, id, form) {
+		event.preventDefault()
+		if(confirm(`Você quer deletar o registro de ID = ${ id }?`)) {
+			form.submit()
+		}
+	}
+</script>
