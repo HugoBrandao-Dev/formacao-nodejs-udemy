@@ -27,7 +27,15 @@
 						<td><%= article.category.title %></td>
 						<td>
 							<a href="#" class="btn btn-warning">Editar</a>
-							<button type="button" class="btn btn-danger">Deletar</button>
+							<form
+								method="POST"
+								action="/articles/delete" 
+								class="d-inline"
+								onsubmit="isDeletarRegistro(event, '<%= article.id %>', this)">
+								<!-- Se utilizar o disabled, o value sempre será undefined -->
+								<input type="hidden" name="ipt-id" value="<%= article.id %>">
+								<button class="btn btn-danger">Deletar</button>
+							</form>
 						</td>
 					</tr>
 				<% }) %>

@@ -17,7 +17,7 @@ router.get("/admin/articles", (req, res) => {
 
 router.get("/admin/articles/new", (req, res) => {
 	/*
-	Passamos as categorias cadastradas no banco, para que 
+	Passamos as categorias cadastradas no banco, para que
 	possamos criar um dropdown delas.
 	*/
 	Category.findAll({})
@@ -38,6 +38,26 @@ router.post("/articles/save", (req, res) => {
 	}).then(() => {
 		res.redirect("/admin/articles")
 	})
+})
+
+router.post("/articles/delete", (req, res) => {
+	let id = req.body["ipt-id"]
+	if (id) {
+		if (!isNaN(id)) {
+				// Método para deletar um registro do banco de dados
+				Article.destroy({
+					where: {
+						id: id
+					}
+				}).then(() => {
+					res.redirect("/admin/articles")
+				})
+		} else { // Se não foi um número
+			res.redirect("/admin/articles")
+		}
+	} else { // Se for Null
+		res.redirect("/admin/articles")
+	}
 })
 
 module.exports = router
