@@ -5,8 +5,12 @@
 	<div class="container">
 		<h1><%= article.title %></h1>
 		<hr>
-		<%= article.body %>
-			<br>
+		<!--
+		A utilização do "-", ao invés do "=", faz com que os elementos HTML de
+		dentro do artigo, sejam interpretrados como, de fato, um ELEMENTO e não um
+		TEXTO a ser renderizado na página.
+	  -->
+		<%- article.body %>
 	</div>
 </body>
 <%- include ("partials/footer.ejs") %>

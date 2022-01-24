@@ -51,7 +51,11 @@ app.use("/", articlesController)
 /* ########## ROTAS ########## */
 
 app.get("/", (req, res) => {
-	articleModel.findAll({})
+	articleModel.findAll({
+		order: [
+			['id', 'DESC']
+		]
+	})
 		.then(articles => {
 			res.render("index", { articles: articles })
 		})
