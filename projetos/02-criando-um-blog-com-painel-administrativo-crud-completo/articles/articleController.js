@@ -104,4 +104,51 @@ router.post("/articles/update", (req, res) => {
 	})
 })
 
+router.get("/articles/page/:num", (req, res) => {
+	let page = req.params.num
+	let offset = null
+
+	if (page) {
+		if (!isNaN(page)) {
+			if (page == 1) {
+				offset = 0
+			} else {
+				/*
+				4 é arbitrário, e representa a quantidade de artigos a serem exibidos
+				por página.
+				Tiramos 1 para que, quando foi multiplicado por 4, dê um resultado igual
+				ou maior do que 4.
+				PÁGINA_URL       OFFSET
+				(2)-1 = 1 x 4      A partir do 4
+				(3)-1 = 2 x 4      A partir do 8
+				*/
+				offset = (parseInt(page) - 1) * 4
+			}
+		}
+	}
+
+	// Busca todos os artigos e também tras a contagem da quantidade de artigos.
+	Article.findAndCountAll({
+		/*
+		Retorna dados a partir de um determinado valor. Neste caso, o offset vai
+		depender da página na qual o usuário se encontra.
+		*/
+		offset: offset,
+
+		// Define um limite de dados as serem buscados.
+		limit: 4
+	})
+		.then(articles => {
+			let hasNext = offset + 4 >= article.count
+
+			let result = {
+				articles,
+				hasNext
+			}
+
+			// Devolve um JSON (só para um breve debug)
+			res.json(result)
+		})
+})
+
 module.exports = router
