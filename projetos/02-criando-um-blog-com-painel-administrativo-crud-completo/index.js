@@ -55,9 +55,11 @@ app.get("/", (req, res) => {
 		order: [
 			['id', 'DESC']
 		]
-	})
-		.then(articles => {
-			res.render("index", { articles: articles })
+	}).then(articles => {
+			categoryModel.findAll({})
+				.then(categories => {
+					res.render("index", { articles: articles, categories: categories})
+				})
 		})
 })
 
@@ -67,10 +69,12 @@ app.get("/:slug", (req, res) => {
 		where: {
 			slug: slug
 		}
-	})
-	.then(article => {
+	}).then(article => {
 		if (article) {
-			res.render("article", { article: article})
+			categoryModel.findAll({})
+				.then(categories => {
+					res.render("article", { article: article, categories: categories})
+				})
 		} else {
 			res.redirect("/")
 		}
