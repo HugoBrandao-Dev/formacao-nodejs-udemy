@@ -127,7 +127,10 @@ router.get("/articles/page/:num", (req, res) => {
 		}
 	}
 
-	// Busca todos os artigos e também tras a contagem da quantidade de artigos.
+	/*
+	Busca todos os artigos, dentro de um ARRAY, e também tras a contagem, um
+	NÚMERO, da quantidade total de artigos, e COLOCA AMBOS DENTRO DE UM OBJETO.
+	*/
 	Article.findAndCountAll({
 		/*
 		Retorna dados a partir de um determinado valor. Neste caso, o offset vai
@@ -139,7 +142,7 @@ router.get("/articles/page/:num", (req, res) => {
 		limit: 4
 	})
 		.then(articles => {
-			let hasNext = offset + 4 >= article.count
+			let hasNext = offset + 4 >= articles.count
 
 			let result = {
 				articles,
@@ -147,7 +150,15 @@ router.get("/articles/page/:num", (req, res) => {
 			}
 
 			// Devolve um JSON (só para um breve debug)
-			res.json(result)
+			// res.json(result)
+
+			Category.findAll()
+				.then(categories => {
+					res.render("admin/articles/page", {
+						result: result,
+						categories: categories
+					})
+				})
 		})
 })
 
