@@ -15,7 +15,8 @@
 							type="text"
 							class="form-control"
 							name="ipt-title"
-							placeholder="Defina o título do artigo">
+							placeholder="Defina o título do artigo"
+							value="<%= article.title %>">
 						<br>
 						<textarea
 							id="txt-article"
@@ -26,11 +27,15 @@
 						<label>Categoria</label>
 						<select name="slt-category" class="form-control">
 							<% categories.forEach(category => { %>
-								<option value="<%= category.id %>"><%= category.title %></option>
+								<% if (category.id === article.categoryId)  {%>
+									<option value="<%= category.id %>" selected><%= category.title %></option>
+								<% } else { %>
+									<option value="<%= category.id %>"><%= category.title %></option>
+								<% } %>
 							<% }) %>
 						</select>
 						<br>
-						<button class="btn btn-success">Atualizar</button>
+						<button class="btn btn-warning">Atualizar</button>
 					</form>
 				</div>
 			</div>
