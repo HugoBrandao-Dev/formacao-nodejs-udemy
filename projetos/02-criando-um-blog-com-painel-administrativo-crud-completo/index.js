@@ -57,6 +57,25 @@ app.get("/", (req, res) => {
 		})
 })
 
+app.get("/:slug", (req, res) => {
+	let slug = req.params.slug
+	articleModel.findOne({
+		where: {
+			slug: slug
+		}
+	})
+	.then(article => {
+		if (article) {
+			res.render("article", { article: article})
+		} else {
+			res.redirect("/")
+		}
+	})
+	.catch(error => {
+		res.redirect("/")
+	})
+})
+
 // Configuração da porta
 app.listen(4000, () => {
 	console.log("O servidor está funcionando com SUCESSO!")
