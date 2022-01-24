@@ -81,4 +81,27 @@ router.get("/admin/articles/edit/:id", (req, res) => {
 		})
 })
 
+router.post("/articles/update", (req, res) => {
+	let id = req.body["ipt-id"]
+	let title = req.body["ipt-title"]
+	let body = req.body["txt-body"]
+	let categoryId = req.body["slt-category"]
+
+	Article.update({
+		title: title,
+		body: body,
+		slug: slugify(title),
+		categoryId: categoryId,
+	}, {
+		where: {
+			id: id
+		}
+	}).then(() => {
+		res.redirect("/admin/articles")
+	})
+	.catch(error => {
+		res.redirect("/")
+	})
+})
+
 module.exports = router

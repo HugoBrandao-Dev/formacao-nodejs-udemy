@@ -9,7 +9,8 @@
 					<h2>Editar artigo</h2>
 				</div>
 				<div class="card-body">
-					<form method="POST" action="/articles/save">
+					<form method="POST" action="/articles/update">
+						<input type="hidden" name="ipt-id" value="<%= article.id %>">
 						<label>Título:</label>
 						<input
 							type="text"
@@ -52,7 +53,7 @@
 		// Qual o ID do textarea que queremos que seja customizado pelo TinyMCE
 		selector: "#txt-article",
 		plugins: [
-			"advlist autolink link image print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons"
+			"lists advlist autolink link image print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons"
 		],
 		language: "pt_BR"
 	})
