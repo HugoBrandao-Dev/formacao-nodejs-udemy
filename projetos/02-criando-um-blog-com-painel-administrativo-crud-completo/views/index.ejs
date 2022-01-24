@@ -1,5 +1,26 @@
 <%- include ("partials/header.ejs") %>
 <body>
-	<h1>Página Inicial</h1>
+	<%- include ("partials/home-navbar.ejs") %>
+	<br>
+	<div class="container">
+		<div class="jumbotron">
+			<h1 class="display-4">Olá, mundo!</h1>
+			<p class="lead">Este é um simples projeto do curso Guia do Programador.</p>
+			<hr class="my-4">
+			<p>Um curso completo de Node.js e suas tecnologias.</p>
+			<a class="btn btn-primary btn-lg" href="https://www.udemy.com/course/formacao-nodejs/" role="button" target="_blank">Formação Node.js</a>
+		</div>
+		<% articles.forEach(article => { %>
+			<div class="card">
+				<div class="card-header">
+					<h3><%= article.title %></h3>
+				</div>
+				<div class="card-body">
+					<a href="#" class="btn btn-info">Ler artigo</a>
+				</div>
+			</div>
+			<br>
+		<% }) %>
+	</div>
 </body>
 <%- include ("partials/footer.ejs") %>

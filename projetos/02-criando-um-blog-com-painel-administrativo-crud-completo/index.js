@@ -45,13 +45,16 @@ Utiliza categories na rota
 */
 app.use("/", categoriesController)
 
-// Utilia articles na rota
+// Utiliza articles na rota
 app.use("/", articlesController)
 
 /* ########## ROTAS ########## */
 
 app.get("/", (req, res) => {
-	res.render("index")
+	articleModel.findAll({})
+		.then(articles => {
+			res.render("index", { articles: articles })
+		})
 })
 
 // Configuração da porta
