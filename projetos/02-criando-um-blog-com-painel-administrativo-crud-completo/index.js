@@ -84,6 +84,30 @@ app.get("/:slug", (req, res) => {
 	})
 })
 
+app.get("/category/:slug", (req, res) => {
+	let slug = req.params.slug
+	categoryModel.findOne({
+		where: {
+			slug: slug
+		},
+		include: [
+			{ model: articleModel }
+		]
+	}).then(category => {
+		if (category) {
+			categoryModel.findAll()
+				.then(categories => {
+					res.render("index", { articles: category.articles, categories })
+				})
+		} else {
+			res.redirect("/")
+		}
+	})
+	.catch(error => {
+		res.redirect("/")
+	})
+})
+
 // Configuração da porta
 app.listen(4000, () => {
 	console.log("O servidor está funcionando com SUCESSO!")
