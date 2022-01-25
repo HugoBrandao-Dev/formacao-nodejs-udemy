@@ -9,7 +9,10 @@ armazenadas no banco de dados.
 const bcrypt = require("bcryptjs")
 
 router.get("/admin/users", (req, res) => {
-	res.send("Listagem de usuários.")
+	User.findAll()
+		.then(users => {
+			res.render("admin/users/index", { users: users })
+		})
 })
 
 router.get("/admin/users/create", (req, res) => {
@@ -27,7 +30,7 @@ router.post("/users/create", (req, res) => {
 	}).then((user) => {
 		// Se o user não foi encontrado (undefined), significa que pode ser usado.
 		if (!user) {
-			
+
 			// Número "tempero" para gerar a hash
 			let salt = bcrypt.genSaltSync(10)
 
