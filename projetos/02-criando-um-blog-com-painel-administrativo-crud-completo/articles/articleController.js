@@ -139,7 +139,10 @@ router.get("/articles/page/:num", (req, res) => {
 		offset: offset,
 
 		// Define um limite de dados as serem buscados.
-		limit: 4
+		limit: 4,
+		order: [
+			["id", "DESC"]
+		]
 	})
 		.then(articles => {
 			let hasNext = offset + 4 >= articles.count
