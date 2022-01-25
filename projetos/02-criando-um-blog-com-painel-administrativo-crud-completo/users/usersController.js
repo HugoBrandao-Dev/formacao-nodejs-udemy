@@ -41,7 +41,10 @@ router.post("/users/create", (req, res) => {
 				email: email,
 				password: hash
 			}).then(() => {
-				res.redirect("/")
+				User.findAll()
+					.then(users => {
+						res.redirect("/admin/users")
+					})
 			})
 			.catch(error => {
 				res.redirect("/")
@@ -85,6 +88,20 @@ router.post("/authenticate", (req, res) => {
 		} else {
 			res.redirect("/login")
 		}
+	})
+})
+
+router.post("/admin/users/delete", (req, res) => {
+	let id = req.body["ipt-id"]
+	User.destroy({
+		where: {
+			id: id
+		}
+	}).then(() => {
+		User.findAll()
+			.then(users => {
+				res.redirect("/admin/users")
+			})
 	})
 })
 

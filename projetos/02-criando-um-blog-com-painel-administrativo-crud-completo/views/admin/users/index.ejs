@@ -20,7 +20,15 @@
 					<td><%= user.email %></td>
 					<td>
 						<a href="#" class="btn btn-warning">Atualizar</a>
-						<button type="button" class="btn btn-danger">Deletar</button>
+						<form
+							id="form-delete"
+							action="/admin/users/delete"
+							method="POST"
+							class="d-inline"
+							onsubmit="isDeletarUsuario(event, this)">
+							<input type="hidden" name="ipt-id" value="<%= user.id %>">
+							<button class="btn btn-danger">Deletar</button>
+						</form>
 					</td>
 				</tr>
 				<% }) %>
@@ -29,3 +37,11 @@
 	</div>
 </body>
 <%- include ("../../partials/footer.ejs") %>
+<script>
+	function isDeletarUsuario(event, form) {
+		event.preventDefault()
+		if (confirm(`Você deseja excluir o registro de ID: ${ form["ipt-id"].value }?`)) {
+			form.submit()
+		}
+	}
+</script>
