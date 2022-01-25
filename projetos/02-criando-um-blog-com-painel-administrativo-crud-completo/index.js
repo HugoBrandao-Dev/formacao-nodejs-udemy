@@ -4,6 +4,9 @@
 const express = require("express")
 const app = express()
 
+// Biblioteca de sessões do express
+const session = require("express-session")
+
 // Body-parser
 const bodyParser = require("body-parser")
 
@@ -26,6 +29,16 @@ const userModel = require("./users/user")
 
 // Configurando a view engine do express para usar EJS
 app.set("view engine", "ejs")
+
+// Configuração o express-session
+app.use(session({
+	// Secret é uma senha de decriptação de sessão, recomenda-se algo aleatório.
+	secret: "tobias",
+	cookie: {
+		// Tempo de expiração e uma sessão/cookie, em milissegundos.
+		maxAge: 30000
+	}
+}))
 
 // Habilitando arquivos estáticos
 app.use(express.static("public"))
@@ -114,6 +127,14 @@ app.get("/category/:slug", (req, res) => {
 	.catch(error => {
 		res.redirect("/")
 	})
+})
+
+app.get("/session", (req, res) => {
+	
+})
+
+app.get("leitura", (req, res) => {
+
 })
 
 // Configuração da porta

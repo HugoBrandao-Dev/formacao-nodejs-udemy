@@ -52,4 +52,40 @@ router.post("/users/create", (req, res) => {
 	})
 })
 
+router.get("/login", (req, res) => {
+	res.render("admin/users/login")
+})
+
+router.post("/authenticate", (req, res) => {
+	let email = req.body["ipt-email"]
+	let password = req.body["ipt-password"]
+
+	// Verifica se há um usuário com o login
+	User.findOne({
+		where: {
+			email: email
+		}
+	}).then(user => {
+		if (user) {
+
+			// Verifica se as senhas conferem, comparando a digita com a armazenada.
+			let isCorrect = bcrypt.compareSync(password, user.password)
+			if (isCorrect) {
+				// Cria uma sessão e salva os dados informados no formulário.
+				req.session.user = {
+					id: user.id,
+					email: user.email
+				}
+
+				// Busca uma sessao e retorna os dados salvos.
+				res.json(req.session.user)
+			} else {
+				res.redirect("/login")
+			}
+		} else {
+			res.redirect("/login")
+		}
+	})
+})
+
 module.exports = router
