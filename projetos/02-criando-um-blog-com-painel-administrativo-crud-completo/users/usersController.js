@@ -20,20 +20,32 @@ router.post("/users/create", (req, res) => {
 	let email = req.body["ipt-email"]
 	let password = req.body["ipt-password"]
 
-	// Número "tempero" para gerar a hash
-	let salt = bcrypt.genSaltSync(10)
+	User.findOne({
+		where: {
+			email:email
+		}
+	}).then((user) => {
+		// Se o user não foi encontrado (undefined), significa que pode ser usado.
+		if (!user) {
+			
+			// Número "tempero" para gerar a hash
+			let salt = bcrypt.genSaltSync(10)
 
-	// Gera uma hash
-	let hash = bcrypt.hashSync(password, salt)
+			// Gera uma hash
+			let hash = bcrypt.hashSync(password, salt)
 
-	User.create({
-		email: email,
-		password: hash
-	}).then(() => {
-		res.redirect("/")
-	})
-	.catch(error => {
-		res.redirect("/")
+			User.create({
+				email: email,
+				password: hash
+			}).then(() => {
+				res.redirect("/")
+			})
+			.catch(error => {
+				res.redirect("/")
+			})
+		} else {
+			res.redirect("/admin/users/create")
+		}
 	})
 })
 
