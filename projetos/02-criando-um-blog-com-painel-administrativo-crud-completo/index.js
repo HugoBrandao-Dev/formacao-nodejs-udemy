@@ -18,6 +18,10 @@ const categoryModel = require("./categories/category")
 const articlesController = require("./articles/articleController")
 const articleModel = require("./articles/article")
 
+// Users
+const usersController = require("./users/usersController")
+const userModel = require("./users/user")
+
 /* ########## CONFIGURAÇÕES ########## */
 
 // Configurando a view engine do express para usar EJS
@@ -47,6 +51,9 @@ app.use("/", categoriesController)
 
 // Utiliza articles na rota
 app.use("/", articlesController)
+
+// Utiliza users na rota
+app.use("/", usersController)
 
 /* ########## ROTAS ########## */
 
