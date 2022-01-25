@@ -17,6 +17,38 @@
 			</div>
 			<br>
 		<% }) %>
+		<div class="row justify-content-center">
+			<nav aria-label="Page navigation example">
+				<ul class="pagination">
+					<% if (result.page > 2) { %>
+						<li class="page-item">
+							<a
+								class="page-link"
+								href="/articles/page/<%= result.page - 1 %>">
+								Anterior
+							</a>
+						</li>
+					<% } else if (result.page == 2) { %>
+						<li class="page-item">
+							<a
+								class="page-link"
+								href="/">
+								Início
+							</a>
+						</li>
+					<% } %>
+					<% if (result.hasNext) { %>
+						<li class="page-item">
+							<a
+								class="page-link"
+								href="/articles/page/<%= result.page + 1 %>">
+								Próxima
+							</a>
+						</li>
+					<% } %>
+					</ul>
+				</nav>
+			</div>
 	</div>
 </body>
 <%- include ("../../partials/footer.ejs") %>

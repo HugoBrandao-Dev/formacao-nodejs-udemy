@@ -145,11 +145,12 @@ router.get("/articles/page/:num", (req, res) => {
 		]
 	})
 		.then(articles => {
-			let hasNext = offset + 4 >= articles.count
+			let hasNext = offset + 4 <= articles.count
 
 			let result = {
-				articles,
-				hasNext
+				page: Number.parseInt(page),
+				articles: articles,
+				hasNext: hasNext
 			}
 
 			// Devolve um JSON (só para um breve debug)
