@@ -10,4 +10,14 @@ router.get("/admin/users/create", (req, res) => {
 	res.render("admin/users/create")
 })
 
+router.post("/users/create", (req, res) => {
+	let email = req.body["ipt-email"]
+	let password = req.body["ipt-password"]
+
+	res.json({
+		email,
+		password
+	})
+})
+
 module.exports = router
