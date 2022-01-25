@@ -105,4 +105,38 @@ router.post("/admin/users/delete", (req, res) => {
 	})
 })
 
+router.get("/admin/users/edit/:id", (req, res) => {
+	let id = req.params.id
+
+	User.findOne({
+		where: {
+			id: id
+		}
+	}).then(user => {
+		if (user) {
+			res.render("admin/users/edit", { user: user })
+		} else {
+			res.redirect("/admin/users")
+		}
+	})
+})
+
+router.post("/users/update", (req, res) => {
+	let id = req.body["ipt-id"]
+	let newEmail = req.body["ipt-new-email"]
+	let newPassword = req.body["ipt-new-password"]
+
+	let salt = bcrypt.genSaltSync(5)
+	let hash = bcrypt.hashSync(newPassword, salt)
+
+	User.update({
+		email: newEmail,
+		password: hash,
+	},{
+		where: { id: id }
+	}).then(() => {
+		res.redirect("/admin/users")
+	})
+})
+
 module.exports = router

@@ -1,0 +1,35 @@
+<%- include ("../../partials/header.ejs") %>
+<body>
+	<%- include ("../../partials/navbar.ejs") %>
+	<div class="container">
+		<div class="card mt-4">
+			<div class="card-header">
+				<h3>Atualizar usuário</h3>
+			</div>
+			<div class="card-body">
+				<form action="/users/update" method="POST">
+					<input type="hidden" name="ipt-id" value="<%= user.id %>">
+					<label>Email atual</label>
+					<input
+						type="email"
+						name="ipt-current-email"
+						class="form-control"
+						placeholder="email@exemplo.com"
+						value="<%= user.email %>"
+						autofocus
+						disabled>
+					<label class="mt-2">Novo email</label>
+					<input
+						type="email"
+						name="ipt-new-email"
+						class="form-control"
+						placeholder="email@exemplo.com">
+					<label class="mt-2">Nova senha</label>
+					<input type="password" name="ipt-new-password" class="form-control">
+					<button type="submit" class="btn btn-warning btn-block mt-2">Atualizar</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+<%- include ("../../partials/footer.ejs") %>

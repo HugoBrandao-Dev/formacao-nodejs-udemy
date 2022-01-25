@@ -19,7 +19,7 @@
 					<td><%= user.id %></td>
 					<td><%= user.email %></td>
 					<td>
-						<a href="#" class="btn btn-warning">Atualizar</a>
+						<a href="/admin/users/edit/<%= user. id %>" class="btn btn-warning">Atualizar</a>
 						<form
 							id="form-delete"
 							action="/admin/users/delete"
