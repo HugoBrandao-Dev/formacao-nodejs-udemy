@@ -4,7 +4,10 @@ const Category = require("../categories/category")
 const Article = require("./article")
 const slugify = require("slugify")
 
-router.get("/admin/articles", (req, res) => {
+// Middleware que verifica se usuário está logado
+const adminAuth = require("../middlewares/adminAuth")
+
+router.get("/admin/articles", adminAuth, (req, res) => {
 	/*
 	Permite que haja um join entre a tabela categories e a articles,
 	devido a tabela articles ter uma Foreign Key vinda do categories
@@ -15,7 +18,7 @@ router.get("/admin/articles", (req, res) => {
 		})
 })
 
-router.get("/admin/articles/new", (req, res) => {
+router.get("/admin/articles/new", adminAuth, (req, res) => {
 	/*
 	Passamos as categorias cadastradas no banco, para que
 	possamos criar um dropdown delas.
@@ -60,7 +63,7 @@ router.post("/articles/delete", (req, res) => {
 	}
 })
 
-router.get("/admin/articles/edit/:id", (req, res) => {
+router.get("/admin/articles/edit/:id", adminAuth, (req, res) => {
 	let id = req.params.id
 	Article.findByPk(id)
 		.then(article => {

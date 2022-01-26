@@ -129,14 +129,6 @@ app.get("/category/:slug", (req, res) => {
 	})
 })
 
-app.get("/session", (req, res) => {
-	
-})
-
-app.get("leitura", (req, res) => {
-
-})
-
 // Configuração da porta
 app.listen(4000, () => {
 	console.log("O servidor está funcionando com SUCESSO!")

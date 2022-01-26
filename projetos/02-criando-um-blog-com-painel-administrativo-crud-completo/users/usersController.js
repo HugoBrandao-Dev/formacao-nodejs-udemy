@@ -81,7 +81,7 @@ router.post("/authenticate", (req, res) => {
 				}
 
 				// Busca uma sessao e retorna os dados salvos.
-				res.json(req.session.user)
+				res.redirect("/admin/articles")
 			} else {
 				res.redirect("/login")
 			}
