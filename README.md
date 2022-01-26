@@ -13,3 +13,8 @@ de um mesmo projeto/explicação.
 Cada projeto do curso possui uma pasta, dentro de database, chamada scripts-sql,
 dentro dela estão os scripts SQL que usei para criação da estrutura do banco
 e para a visualização dos registros inseridos em suas tabelas.
+
+No projeto 2, existe um bug de paginação, que é quando selecionamos a categoria
+do artigo na barra de navegação, a paginação continua na tela, mas fica bugada,
+selecionando artigos de categoria geral. Tal bug não foi corrigido no projeto
+final.
