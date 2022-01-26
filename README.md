@@ -18,3 +18,9 @@ No projeto 2, existe um bug de paginação, que é quando selecionamos a categor
 do artigo na barra de navegação, a paginação continua na tela, mas fica bugada,
 selecionando artigos de categoria geral. Tal bug não foi corrigido no projeto
 final.
+
+Na aula 131 sobre "JSONs encurtados", o professor chama objetos JS de JSON,
+o que não é correto. Um objeto JS pode ser convertido em um JSON, desde que seus
+valores de propriedades sejam aceitáveis pelo JSON (ele não aceita todos os tipo
+de valores que um objeto JS aceita). Sendo assim, a regra de encurtamento serve
+para OBJETOS JS, e não para JSON.
