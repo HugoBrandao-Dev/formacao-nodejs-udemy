@@ -3,6 +3,9 @@ const Reader = require("./components/Reader")
 let reader = new Reader()
 let basePath = `${ __dirname }/archives/original`
 
-reader.read(`${ basePath }/cursos.csv`, error => {
-	console.log(error)
-})
+async function main() {
+	let arquivo = await reader.read(`${ basePath }/cursos.csv`)
+	console.log(arquivo)
+}
+
+main()
