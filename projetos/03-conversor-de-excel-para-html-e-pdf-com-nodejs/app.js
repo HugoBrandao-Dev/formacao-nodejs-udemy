@@ -9,8 +9,10 @@ async function main() {
 	let archive = await reader.read(`${ basePath }/cursos.csv`)
 	let archiveColumns = Processor.process(archive)
 	let table = new Table(archiveColumns)
-	console.log(table.header)
-	console.log(table.rows)
+
+	// Métodos get são chamados como atributos
+	console.log(table.rowsCount)
+	console.log(table.columnCount)
 }
 
 main()
