@@ -1,0 +1,14 @@
+{
+  "name": "03-conversor-de-excel-para-html-e-pdf-com-nodejs",
+  "version": "1.0.0",
+  "description": "Projeto para convertermos uma tabela csv em um arquivo html e pdf",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hugo da Rocha Brandão",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.6"
+  }
+}
