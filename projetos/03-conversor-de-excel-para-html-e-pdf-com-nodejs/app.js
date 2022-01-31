@@ -1,17 +1,20 @@
 const Reader = require("./components/Reader")
 const Processor = require("./components/Processor")
+const Writer = require("./components/Writer")
 const Table = require("./components/Table")
 const HtmlParser = require("./components/HtmlParser")
 
 let reader = new Reader()
-let basePath = `${ __dirname }/archives/original`
+let writer = new Writer()
+let originalBasePath = `${ __dirname }/archives/original`
+let convertedBasePath = `${ __dirname }/archives/converted`
 
 async function main() {
-	let archive = await reader.read(`${ basePath }/cursos.csv`)
+	let archive = await reader.read(`${ originalBasePath }/cursos.csv`)
 	let archiveColumns = Processor.process(archive)
 	let table = new Table(archiveColumns)
 	let html = await HtmlParser.parse(table)
-	console.log(html)
+	writer.write(`${ convertedBasePath }/${ Date.now() }.html`, html)
 }
 
 main()
