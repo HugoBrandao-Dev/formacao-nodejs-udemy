@@ -5,32 +5,48 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Loja de games</title>
-
+	
 	<!-- CDN Bootstrap 4.1.x -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
 	<div class="container">
-		<h3>Lista de games</h3>
-		<table id="table-games" class="table">
-			<thead>
-				<tr>
-						<th scope="col">ID</th>
-						<th scope="col">Título</th>
-						<th scope="col">Ano</th>
-						<th scope="col">Preço</th>
-						<th scope="col">Ações</th>
-				</tr>
-			</thead>
-			<tbody>
-			  
-			</tbody>
-		  </table>
+		<div class="row">
+			<div class="col">
+				<h3>Lista de games</h3>
+				<table id="table-games" class="table">
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col">ID</th>
+							<th scope="col">Título</th>
+							<th scope="col">Ano</th>
+							<th scope="col">Preço</th>
+							<th scope="col">Ações</th>
+						</tr>
+					</thead>
+					<tbody>
+						
+					</tbody>
+				</table>
+			</div>
+			<div class="col">
+				<h3>Cadastrar novo game</h3>
+				<form method="POST" name="form-criar-game">
+					<label>Título</label>
+					<input type="text" class="form-control" name="ipt-title" placeholder="Informe o título">
+					<label class="mt-2">Ano</label>
+					<input type="number" class="form-control" name="ipt-year" placeholder="Informe o ano de publicação">
+					<label class="mt-2">Preço</label>
+					<input type="number" class="form-control" name="ipt-price">
+					<button id="btn-cadastrar" type="button" class="btn btn-success mt-2">Cadastrar</button>
+				</form>
+			</div>
+		</div>
 	</div>
 	
 	<!-- CDN Axios -->
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
+	
 	<!-- CDN Bootstrap 4.1.x -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
