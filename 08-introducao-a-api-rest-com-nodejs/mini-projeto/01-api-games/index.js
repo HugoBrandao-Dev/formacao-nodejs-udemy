@@ -60,6 +60,18 @@ app.get("/game/:id", (req, res) => {
 	}
 })
 
+app.post("/game", (req, res) => {
+	let { title, year, price } = req.body
+	let id = database.games.length + 1
+	database.games.push({
+		id,
+		title,
+		year,
+		price
+	})
+	res.sendStatus(201)
+})
+
 app.listen(4000, () => {
 	console.log('App rodando...')
 })
