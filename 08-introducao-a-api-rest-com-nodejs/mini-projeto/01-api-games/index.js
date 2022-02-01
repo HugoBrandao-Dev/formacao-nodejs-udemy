@@ -39,15 +39,16 @@ app.get("/games", (req, res) => {
 
 // Busca por um jogo baseado no id informado na requisição
 app.get("/game/:id", (req, res) => {
-	let id = parseInt(req.params.id)
-	if (id) {
-		if (!isNaN(id)) {
-			res.statusCode = 200
-
+	let paramsID = req.params.id
+	if (paramsID) {
+		if (!isNaN(paramsID)) {
+			let id = parseInt(paramsID)
+			
 			// Faz a busca por um jogo que corresponda ao ID informado
 			let found = database.games.find(game => game.id === id)
-
+			
 			if (found) {
+				res.statusCode = 200
 				res.json(found)
 			} else {
 				res.sendStatus(404)
@@ -62,7 +63,7 @@ app.get("/game/:id", (req, res) => {
 
 app.post("/game", (req, res) => {
 	let { title, year, price } = req.body
-	let id = database.games.length + 1
+	let id = parseInt(database.games.length + 1)
 	database.games.push({
 		id,
 		title,
@@ -70,6 +71,29 @@ app.post("/game", (req, res) => {
 		price
 	})
 	res.sendStatus(201)
+})
+
+app.delete("/game/:id", (req, res) => {
+	let paramsID  = req.params.id
+	if (paramsID) {
+		if (!isNaN(paramsID)) {
+			let id = parseInt(paramsID)
+			/*
+			findIndex fará a busca por um chave (id) que tenha valor 
+			igual ao informado pelo usuário.
+			*/
+			let index = database.games.findIndex(game => game.id === id)
+
+			if (index != -1) {
+				database.games.splice(index, 1)
+			}
+			res.sendStatus(index == -1 ? 404 : 200)
+		} else {
+			res.sendStatus(400)
+		}
+	} else {
+		res.sendStatus(400)
+	}
 })
 
 app.listen(4000, () => {
