@@ -61,6 +61,7 @@ app.get("/game/:id", (req, res) => {
 	}
 })
 
+// Registra um novo game no banco de dados fake
 app.post("/game", (req, res) => {
 	let { title, year, price } = req.body
 	let id = parseInt(database.games.length + 1)
@@ -73,6 +74,7 @@ app.post("/game", (req, res) => {
 	res.sendStatus(201)
 })
 
+// Faz a deleção em um jogo baseado no id informado pelo usuário
 app.delete("/game/:id", (req, res) => {
 	let paramsID  = req.params.id
 	if (paramsID) {
@@ -88,6 +90,40 @@ app.delete("/game/:id", (req, res) => {
 				database.games.splice(index, 1)
 			}
 			res.sendStatus(index == -1 ? 404 : 200)
+		} else {
+			res.sendStatus(400)
+		}
+	} else {
+		res.sendStatus(400)
+	}
+})
+
+// Atualiza dados de um jogo já cadastrado
+app.put("/game/:id", (req, res) => {
+	let paramsID = req.params.id
+	if (paramsID) {
+		if (!isNaN(paramsID)) {
+			let id = parseInt(paramsID)
+			
+			// Faz a busca por um jogo que corresponda ao ID informado
+			let found = database.games.find(game => game.id === id)
+			
+			if (found) {
+				let { title, year, price } = req.body
+
+				if (title) {
+					found.title = title
+				}
+				if (year) {
+					found.year = year
+				}
+				if (price) {
+					found.price = price
+				}
+				res.sendStatus(200)
+			} else {
+				res.sendStatus(404)
+			}
 		} else {
 			res.sendStatus(400)
 		}
