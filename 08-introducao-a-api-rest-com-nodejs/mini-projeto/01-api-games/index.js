@@ -1,6 +1,11 @@
 const express = require("express")
 const app = express()
 const bodyParser = require("body-parser")
+const cors = require("cors")
+
+/* Cors é um mecanísmo de segurança que impede o acesso externo. Neste
+caso, estamos configurando-o para que possamos consumir a API. */
+app.use(cors())
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
