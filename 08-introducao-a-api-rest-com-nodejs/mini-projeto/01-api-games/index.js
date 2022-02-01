@@ -29,8 +29,11 @@ let database = {
 	]
 }
 
-app.get("/", () => {
-
+app.get("/games", (req, res) => {
+	
+	// Define o código de estatus na resposta
+	res.statusCode = 200
+	res.json(database.games)
 })
 
 app.listen(4000, () => {
