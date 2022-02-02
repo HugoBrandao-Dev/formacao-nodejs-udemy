@@ -11,13 +11,13 @@ axios.get("http://localhost:4000/games")
 
 			// Cria uma nova string/tag para ser colocada dentro da tabela
 			let trItem = `<tr>
-			<th scope="row">${game.id}</th>
-			<td>${ game.title }</td>
-			<td>${ game.year }</td>
-			<td>R$ ${ game.price }</td>
+			<th scope="row" data-id="${ game.id }">${game.id}</th>
+			<td data-title="${ game.title }">${ game.title }</td>
+			<td data-year="${ game.year }">${ game.year }</td>
+			<td data-price="${ game.price }">R$ ${ game.price }</td>
 			<td>
 				<a class="btn btn-warning mr-2">Editar</a>
-				<button class="btn btn-danger">Deletar</button>
+				<button class="btn btn-danger" onclick="deletarGame(${ game.id })">Deletar</button>
 			</td>
 			</tr>`
 
@@ -55,4 +55,15 @@ function createGame() {
 		}).catch(error => {
 			console.log(error)
 		})
+}
+
+function deletarGame(id) {
+	if (confirm(`Deletar jogo de id ${ id } ?`)){
+		axios.delete(`http://localhost:4000/game/${ id }`)
+			.then(response => {
+				console.log(response.status)
+			}).catch(error => {
+				console.log(error)
+			})
+	}
 }
