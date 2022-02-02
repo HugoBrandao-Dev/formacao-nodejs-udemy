@@ -3,6 +3,12 @@ const app = express()
 const bodyParser = require("body-parser")
 const cors = require("cors")
 
+// Biblioteca do Node para a geração de token
+const jwt = require("jsonwebtoken")
+
+// Senha SECRETA para a geração de Token
+const JWTSecret = "ajsdçlfçlaslfajlçdfuuoier"
+
 /* Cors é um mecanísmo de segurança que impede o acesso externo. Neste
 caso, estamos configurando-o para que possamos consumir a API. */
 app.use(cors())
@@ -164,8 +170,25 @@ app.post("/auth", (req, res) => {
 
 			// Verifica se as senhas conferem
 			if (user.password == password) {
-				res.status(200)
-				res.json({ token: "Fake Token gerado com sucesso. :)"})
+
+				// Armazenar somente o ESSENCIAL, chamada de payload (carga útil)
+				jwt.sign({
+					id: user.id,
+					email: user.email
+				}, 
+				JWTSecret,
+				// Tempo em que o token expira
+				{
+					expiresIn: "24h"
+				}, (error, token) => {
+					if (error) {
+						res.status(400)
+						res.json({ error: "Falha interna." })
+					} else {
+						res.status(200)
+						res.json({ token })
+					}
+				})
 			} else {
 				res.status(401)
 				res.json({ error: "Credenciais erradas."})
