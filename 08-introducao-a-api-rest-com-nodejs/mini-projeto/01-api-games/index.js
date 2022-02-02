@@ -52,7 +52,7 @@ let database = {
 app.get("/games", (req, res) => {
 
 	// Define o código de estatus na resposta
-	res.statusCode = 200
+	res.status(200)
 	res.json(database.games)
 })
 
@@ -67,16 +67,16 @@ app.get("/game/:id", (req, res) => {
 			let found = database.games.find(game => game.id === id)
 			
 			if (found) {
-				res.statusCode = 200
+				res.status(200)
 				res.json(found)
 			} else {
-				res.sendStatus(404)
+				res.status(404)
 			}
 		} else {
-			res.sendStatus(400)
+			res.status(400)
 		}
 	} else {
-		res.sendStatus(400)
+		res.status(400)
 	}
 })
 
@@ -90,7 +90,7 @@ app.post("/game", (req, res) => {
 		year,
 		price
 	})
-	res.sendStatus(201)
+	res.status(201)
 })
 
 // Faz a deleção em um jogo baseado no id informado pelo usuário
@@ -108,12 +108,12 @@ app.delete("/game/:id", (req, res) => {
 			if (index != -1) {
 				database.games.splice(index, 1)
 			}
-			res.sendStatus(index == -1 ? 404 : 200)
+			res.status(index == -1 ? 404 : 200)
 		} else {
-			res.sendStatus(400)
+			res.status(400)
 		}
 	} else {
-		res.sendStatus(400)
+		res.status(400)
 	}
 })
 
@@ -139,15 +139,15 @@ app.put("/game/:id", (req, res) => {
 				if (price) {
 					found.price = price
 				}
-				res.sendStatus(200)
+				res.status(200)
 			} else {
-				res.sendStatus(404)
+				res.status(404)
 			}
 		} else {
-			res.sendStatus(400)
+			res.status(400)
 		}
 	} else {
-		res.sendStatus(400)
+		res.status(400)
 	}
 })
 
@@ -157,25 +157,25 @@ app.post("/auth", (req, res) => {
 	if (email && password) {
 
 		// Faz a busca pelo email dentro de Users
-		let user = database.users.find(user => { user.email == email })
+		let user = database.users.find(user => user.email == email )
 
 		// Caso o email estaja cadastrado.
 		if (user) {
 
 			// Verifica se as senhas conferem
 			if (user.password == password) {
-				res.status = 200
+				res.status(200)
 				res.json({ token: "Fake Token gerado com sucesso. :)"})
 			} else {
-				res.status = 401
+				res.status(401)
 				res.json({ error: "Credenciais erradas."})
 			}
 		} else {
-			res.status = 404
+			res.status(404)
 			res.json({ error: "Usuário não encontrado."})
 		}
 	} else {
-		res.status = 400
+		res.status(400)
 		res.json({ error: "Dados inválidos." })
 	}
 })
