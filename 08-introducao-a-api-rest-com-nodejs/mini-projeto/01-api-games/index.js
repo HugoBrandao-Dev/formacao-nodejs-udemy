@@ -16,6 +16,44 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
+// Middleware
+function auth(req, res, next) {
+
+	// Header
+	const authToken = req.headers['authorization']
+
+	if (authToken) {
+
+		// O token vem com "Bearer" na frente, e não precisamos dela
+		const bearer = authToken.split(' ')
+		const token = bearer[1]
+
+		// Verifica se o Token passado é válido
+		jwt.verify(token, JWTSecret, (error, data) => {
+			if (error) {
+				res.status(401)
+				res.json({ error: "Token inválido."})
+			} else {
+
+				/*
+				Carrega mais alguns dados dentro da requisição,
+				fazendo com que a rota tenha acesso a esses dados,
+				também.
+				*/
+				req.token = token
+				req.loggedUser = { id: data.id, email: data.email }
+				req.curso = "Formação Node.JS"
+
+				// Com o next() aqui, se a autenticação falhar, a rota não será executada.
+				next()
+			}
+		})
+	} else {
+		res.status(401)
+		res.json({ error: "Token inválido." })
+	}
+}
+
 // Banco de dados fake
 let database = {
 	games: [
@@ -55,15 +93,17 @@ let database = {
 }
 
 // Lista todos os jogos cadastrados
-app.get("/games", (req, res) => {
+app.get("/games", auth, (req, res) => {
 
 	// Define o código de estatus na resposta
 	res.status(200)
-	res.json(database.games)
+
+	// As informações de "user" e "curso", são carregadas no Middleware
+	res.json({ user: req.loggedUser, curso: req.curso, games: database.games })
 })
 
 // Busca por um jogo baseado no id informado na requisição
-app.get("/game/:id", (req, res) => {
+app.get("/game/:id", auth, (req, res) => {
 	let paramsID = req.params.id
 	if (paramsID) {
 		if (!isNaN(paramsID)) {
@@ -74,7 +114,7 @@ app.get("/game/:id", (req, res) => {
 			
 			if (found) {
 				res.status(200)
-				res.json(found)
+				res.json({ found })
 			} else {
 				res.status(404)
 			}
@@ -87,7 +127,7 @@ app.get("/game/:id", (req, res) => {
 })
 
 // Registra um novo game no banco de dados fake
-app.post("/game", (req, res) => {
+app.post("/game", auth, (req, res) => {
 	let { title, year, price } = req.body
 	let id = parseInt(database.games.length + 1)
 	database.games.push({
@@ -100,7 +140,7 @@ app.post("/game", (req, res) => {
 })
 
 // Faz a deleção em um jogo baseado no id informado pelo usuário
-app.delete("/game/:id", (req, res) => {
+app.delete("/game/:id", auth, (req, res) => {
 	let paramsID  = req.params.id
 	if (paramsID) {
 		if (!isNaN(paramsID)) {
@@ -124,7 +164,7 @@ app.delete("/game/:id", (req, res) => {
 })
 
 // Atualiza dados de um jogo já cadastrado
-app.put("/game/:id", (req, res) => {
+app.put("/game/:id", auth, (req, res) => {
 	let paramsID = req.params.id
 	if (paramsID) {
 		if (!isNaN(paramsID)) {
@@ -157,7 +197,7 @@ app.put("/game/:id", (req, res) => {
 	}
 })
 
-app.post("/auth", (req, res) => {
+app.post("/auth", auth, (req, res) => {
 	let { email, password } = req.body
 
 	if (email && password) {
