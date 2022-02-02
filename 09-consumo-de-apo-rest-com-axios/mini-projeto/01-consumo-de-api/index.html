@@ -30,15 +30,17 @@
 				</table>
 			</div>
 			<div class="col">
-				<h3>Cadastrar novo game</h3>
-				<form method="POST" name="form-criar-game">
+				<h3>Cadastro e atualização de game</h3>
+				<form method="POST" name="form-game">
 					<label>Título</label>
+					<input type="hidden" name="ipt-id">
 					<input type="text" class="form-control" name="ipt-title" placeholder="Informe o título">
 					<label class="mt-2">Ano</label>
 					<input type="number" class="form-control" name="ipt-year" placeholder="Informe o ano de publicação">
 					<label class="mt-2">Preço</label>
 					<input type="number" class="form-control" name="ipt-price">
-					<button id="btn-cadastrar" type="button" class="btn btn-success mt-2">Cadastrar</button>
+						<button id="btn-cadastrar" type="button" class="btn btn-success mt-2">Cadastrar</button>
+						<button id="btn-atualizar" type="button" class="btn btn-warning mt-2 ml-2" disabled>Atualizar</button>
 				</form>
 			</div>
 		</div>
