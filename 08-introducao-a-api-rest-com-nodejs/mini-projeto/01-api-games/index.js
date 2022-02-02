@@ -31,6 +31,20 @@ let database = {
 			year: 2012,
 			price: 20
 		}
+	],
+	users: [
+		{
+			id: 1,
+			name: "Tobias de Oliveira",
+			email: "tobias@gmail.com",
+			password: "tobias_123"
+		}, 
+		{
+			id: 2,
+			name: "Doralice Cruz",
+			email: "doralice_cru@hotmail.com",
+			password: "cruz321"
+		}
 	]
 }
 
@@ -134,6 +148,35 @@ app.put("/game/:id", (req, res) => {
 		}
 	} else {
 		res.sendStatus(400)
+	}
+})
+
+app.post("/auth", (req, res) => {
+	let { email, password } = req.body
+
+	if (email && password) {
+
+		// Faz a busca pelo email dentro de Users
+		let user = database.users.find(user => { user.email == email })
+
+		// Caso o email estaja cadastrado.
+		if (user) {
+
+			// Verifica se as senhas conferem
+			if (user.password == password) {
+				res.status = 200
+				res.json({ token: "Fake Token gerado com sucesso. :)"})
+			} else {
+				res.status = 401
+				res.json({ error: "Credenciais erradas."})
+			}
+		} else {
+			res.status = 404
+			res.json({ error: "Usuário não encontrado."})
+		}
+	} else {
+		res.status = 400
+		res.json({ error: "Dados inválidos." })
 	}
 })
 
