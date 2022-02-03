@@ -7,7 +7,7 @@ const cors = require("cors")
 const jwt = require("jsonwebtoken")
 
 // Senha SECRETA para a geração de Token
-const JWTSecret = "ajsdçlfçlaslfajlçdfuuoier"
+const JWTSecret = "woqieurqwiuoeruqwrqwrxcvxv"
 
 /* Cors é um mecanísmo de segurança que impede o acesso externo. Neste
 caso, estamos configurando-o para que possamos consumir a API. */
@@ -16,7 +16,7 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-// Middleware
+// Middleware de autenticação
 function auth(req, res, next) {
 
 	// Header
@@ -24,7 +24,7 @@ function auth(req, res, next) {
 
 	if (authToken) {
 
-		// O token vem com "Bearer" na frente, e não precisamos dela
+		// O token vem com "Bearer" na frente, e não precisamos dela para validação
 		const bearer = authToken.split(' ')
 		const token = bearer[1]
 
@@ -36,9 +36,8 @@ function auth(req, res, next) {
 			} else {
 
 				/*
-				Carrega mais alguns dados dentro da requisição,
-				fazendo com que a rota tenha acesso a esses dados,
-				também.
+				Carrega mais alguns dados dentro da requisição, fazendo com que a rota
+				tenha acesso a esses dados, também.
 				*/
 				req.token = token
 				req.loggedUser = { id: data.id, email: data.email }
@@ -50,7 +49,7 @@ function auth(req, res, next) {
 		})
 	} else {
 		res.status(401)
-		res.json({ error: "Token inválido." })
+		res.json({ error: "Token inválido" })
 	}
 }
 
@@ -82,7 +81,7 @@ let database = {
 			name: "Tobias de Oliveira",
 			email: "tobias@gmail.com",
 			password: "tobias_123"
-		}, 
+		},
 		{
 			id: 2,
 			name: "Doralice Cruz",
@@ -98,8 +97,7 @@ app.get("/games", auth, (req, res) => {
 	// Define o código de estatus na resposta
 	res.status(200)
 
-	// As informações de "user" e "curso", são carregadas no Middleware
-	res.json({ user: req.loggedUser, curso: req.curso, games: database.games })
+	res.json(database.games)
 })
 
 // Busca por um jogo baseado no id informado na requisição
@@ -108,13 +106,13 @@ app.get("/game/:id", auth, (req, res) => {
 	if (paramsID) {
 		if (!isNaN(paramsID)) {
 			let id = parseInt(paramsID)
-			
+
 			// Faz a busca por um jogo que corresponda ao ID informado
-			let found = database.games.find(game => game.id === id)
-			
-			if (found) {
+			let game = database.games.find(game => game.id === id)
+
+			if (game) {
 				res.status(200)
-				res.json({ found })
+				res.json({ game })
 			} else {
 				res.status(404)
 			}
@@ -146,7 +144,7 @@ app.delete("/game/:id", auth, (req, res) => {
 		if (!isNaN(paramsID)) {
 			let id = parseInt(paramsID)
 			/*
-			findIndex fará a busca por um chave (id) que tenha valor 
+			findIndex fará a busca por um chave (id) que tenha valor
 			igual ao informado pelo usuário.
 			*/
 			let index = database.games.findIndex(game => game.id === id)
@@ -169,21 +167,21 @@ app.put("/game/:id", auth, (req, res) => {
 	if (paramsID) {
 		if (!isNaN(paramsID)) {
 			let id = parseInt(paramsID)
-			
+
 			// Faz a busca por um jogo que corresponda ao ID informado
-			let found = database.games.find(game => game.id === id)
-			
-			if (found) {
+			let game = database.games.find(game => game.id === id)
+
+			if (game) {
 				let { title, year, price } = req.body
 
 				if (title) {
-					found.title = title
+					game.title = title
 				}
 				if (year) {
-					found.year = year
+					game.year = year
 				}
 				if (price) {
-					found.price = price
+					game.price = price
 				}
 				res.status(200)
 			} else {
@@ -197,7 +195,7 @@ app.put("/game/:id", auth, (req, res) => {
 	}
 })
 
-app.post("/auth", auth, (req, res) => {
+app.post("/auth", (req, res) => {
 	let { email, password } = req.body
 
 	if (email && password) {
@@ -215,11 +213,11 @@ app.post("/auth", auth, (req, res) => {
 				jwt.sign({
 					id: user.id,
 					email: user.email
-				}, 
+				},
 				JWTSecret,
 				// Tempo em que o token expira
 				{
-					expiresIn: "24h"
+					expiresIn: "2d"
 				}, (error, token) => {
 					if (error) {
 						res.status(400)

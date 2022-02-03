@@ -1,4 +1,10 @@
-axios.get("http://localhost:4000/games")
+let axiosConfig = {
+	headers: {
+		Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0b2JpYXNAZ21haWwuY29tIiwiaWF0IjoxNjQzODI0MzA0LCJleHAiOjE2NDM5OTcxMDR9.amf0xWDymFP4w2UG6CWPJulTYhYZXsKhlbWdUDbSnEw"
+	}
+}
+
+axios.get("http://localhost:4000/games", axiosConfig)
 	.then(response => {
 		let games = response.data
 
@@ -47,7 +53,7 @@ function createGame() {
 		price
 	}
 
-	axios.post('http://localhost:4000/game', gameObject)
+	axios.post('http://localhost:4000/game', gameObject, axiosConfig)
 		.then(response => {
 			if (response.status == 201) {
 				alert("Game cadastrado com sucesso.")
@@ -59,9 +65,8 @@ function createGame() {
 
 function deletarGame(id) {
 	if (confirm(`Deletar jogo de id ${ id } ?`)){
-		axios.delete(`http://localhost:4000/game/${ id }`)
+		axios.delete(`http://localhost:4000/game/${ id }`, axiosConfig)
 			.then(response => {
-				console.log(response.status)
 			}).catch(error => {
 				console.log(error)
 			})
@@ -72,9 +77,10 @@ let btnAtualizar = document.querySelector("button#btn-atualizar")
 btnAtualizar.addEventListener('click', atualizarGame)
 
 function editarGame(id) {
-	axios.get(`http://localhost:4000/game/${ id }`)
+	axios.get(`http://localhost:4000/game/${ id }`, axiosConfig)
 		.then(response => {
-			let game = response.data
+			let game = response.data.game
+			console.log(game)
 
 			let formGame = document.forms['form-game']
 			let iptId = formGame['ipt-id']
@@ -111,7 +117,7 @@ function atualizarGame() {
 		price
 	}
 
-	axios.put(`http://localhost:4000/game/${ id }`, gameObject)
+	axios.put(`http://localhost:4000/game/${ id }`, gameObject, axiosConfig)
 		.then(response => {
 			if (response.status == 200) {
 				btnAtualizar.setAttribute('disabled', 'true')
