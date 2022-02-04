@@ -1,6 +1,7 @@
 let axiosConfig = {
 	headers: {
-		Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0b2JpYXNAZ21haWwuY29tIiwiaWF0IjoxNjQzODI0MzA0LCJleHAiOjE2NDM5OTcxMDR9.amf0xWDymFP4w2UG6CWPJulTYhYZXsKhlbWdUDbSnEw"
+		// Busca no localStorage um token de nome apiGamesToken e concatena.
+		Authorization: `Bearer ${ localStorage.getItem("apiGamesToken")}`
 	}
 }
 
@@ -138,6 +139,12 @@ function login() {
 	axios.post("http://localhost:4000/auth", { email, password })
 		.then(response => {
 			let token = response.data.token
+
+			// Armazenha o token dentro do armazenamento local do navegador
+			localStorage.setItem("apiGamesToken", token)
+
+			// Atualiza o Authorization para que tenha o valor do novo token gerado
+			axiosConfig.headers.Authorization = `Bearer ${ localStorage.getItem('apiGamesToken') }`
 			alert("Logado com sucesso")
 		})
 		.catch(error => {
