@@ -4,6 +4,34 @@ let axiosConfig = {
 	}
 }
 
+/*============================ FORMULÁRIOS ===================================*/
+
+// Formulário de cadastro e atualização
+let formGame = document.forms['form-game']
+let iptId = formGame["ipt-id"]
+let iptTitle = formGame["ipt-title"]
+let iptYear = formGame["ipt-year"]
+let iptPrice = formGame["ipt-price"]
+
+// Formulário de login
+let formLogin = document.forms['form-login']
+let iptEmail = formLogin['ipt-email']
+let iptPassword = formLogin['ipt-password']
+
+/*============================ EVENTOS DOM ===================================*/
+
+let btnAtualizar = document.querySelector('button#btn-atualizar')
+btnAtualizar.addEventListener('click', atualizarGame)
+
+let btnCadastrar = document.querySelector('button#btn-cadastrar')
+btnCadastrar.addEventListener('click', createGame)
+
+let btnLogin = document.querySelector('button#btn-login')
+btnLogin.addEventListener('click', login)
+
+/*============================== AXIOS =======================================*/
+
+// Busca os dados dentro do banco e popula a tabela de jogos cadastrados.
 axios.get("http://localhost:4000/games", axiosConfig)
 	.then(response => {
 		let games = response.data
@@ -34,15 +62,8 @@ axios.get("http://localhost:4000/games", axiosConfig)
 		console.log(error)
 	})
 
-let btnCadastrar = document.querySelector('button#btn-cadastrar')
-btnCadastrar.addEventListener('click', createGame)
-
+// Cria um novo jogo, baseado nas informações do formulário de cadastro/atualização
 function createGame() {
-	let formGame = document.forms['form-game']
-	let iptTitle = formGame["ipt-title"]
-	let iptYear = formGame["ipt-year"]
-	let iptPrice = formGame["ipt-price"]
-
 	let title = iptTitle.value
 	let year = parseInt(iptYear.value)
 	let price = parseFloat(iptPrice.value).toFixed(2)
@@ -55,38 +76,27 @@ function createGame() {
 
 	axios.post('http://localhost:4000/game', gameObject, axiosConfig)
 		.then(response => {
-			if (response.status == 201) {
-				alert("Game cadastrado com sucesso.")
-			}
 		}).catch(error => {
 			console.log(error)
 		})
 }
 
+// Exclui um jogo, baseado no seu id.
 function deletarGame(id) {
 	if (confirm(`Deletar jogo de id ${ id } ?`)){
 		axios.delete(`http://localhost:4000/game/${ id }`, axiosConfig)
-			.then(response => {
+			.then((response) => {
 			}).catch(error => {
 				console.log(error)
 			})
 	}
 }
 
-let btnAtualizar = document.querySelector("button#btn-atualizar")
-btnAtualizar.addEventListener('click', atualizarGame)
-
+// Pega as informações do jogo no banco e popula o formulário para a edição.
 function editarGame(id) {
 	axios.get(`http://localhost:4000/game/${ id }`, axiosConfig)
 		.then(response => {
 			let game = response.data.game
-			console.log(game)
-
-			let formGame = document.forms['form-game']
-			let iptId = formGame['ipt-id']
-			let iptTitle = formGame['ipt-title']
-			let iptYear = formGame['ipt-year']
-			let iptPrice = formGame['ipt-price']
 
 			iptId.value = game.id
 			iptTitle.value = game.title
@@ -99,13 +109,8 @@ function editarGame(id) {
 		})
 }
 
+// Faz a atualização de um jogo, baseada nas informações presentes no formulário
 function atualizarGame() {
-	let formGame = document.forms['form-game']
-	let iptId = formGame["ipt-id"]
-	let iptTitle = formGame["ipt-title"]
-	let iptYear = formGame["ipt-year"]
-	let iptPrice = formGame["ipt-price"]
-
 	let id = iptId.value
 	let title = iptTitle.value
 	let year = parseInt(iptYear.value)
@@ -119,12 +124,23 @@ function atualizarGame() {
 
 	axios.put(`http://localhost:4000/game/${ id }`, gameObject, axiosConfig)
 		.then(response => {
-			if (response.status == 200) {
-				btnAtualizar.setAttribute('disabled', 'true')
-				iptId.value = ''
-				alert("Game atualizado com sucesso.")
-			}
-		}).catch(error => {
+		})
+		.catch(error => {
+			console.log(error)
+		})
+}
+
+// Faz o login para autenticação do usuário (geração do token)
+function login() {
+	let email = iptEmail.value
+	let password = iptPassword.value
+
+	axios.post("http://localhost:4000/auth", { email, password })
+		.then(response => {
+			let token = response.data.token
+			alert("Logado com sucesso")
+		})
+		.catch(error => {
 			console.log(error)
 		})
 }

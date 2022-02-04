@@ -9,7 +9,7 @@ const jwt = require("jsonwebtoken")
 // Senha SECRETA para a geração de Token
 const JWTSecret = "woqieurqwiuoeruqwrqwrxcvxv"
 
-/* Cors é um mecanísmo de segurança que impede o acesso externo. Neste
+/* Cors é um mecanismo de segurança que impede o acesso externo. Neste
 caso, estamos configurando-o para que possamos consumir a API. */
 app.use(cors())
 
@@ -96,7 +96,6 @@ app.get("/games", auth, (req, res) => {
 
 	// Define o código de estatus na resposta
 	res.status(200)
-
 	res.json(database.games)
 })
 
@@ -127,7 +126,7 @@ app.get("/game/:id", auth, (req, res) => {
 // Registra um novo game no banco de dados fake
 app.post("/game", auth, (req, res) => {
 	let { title, year, price } = req.body
-	let id = parseInt(database.games.length + 1)
+	let id = parseInt(database.games[database.games.length - 1].id + 1)
 	database.games.push({
 		id,
 		title,
@@ -195,6 +194,7 @@ app.put("/game/:id", auth, (req, res) => {
 	}
 })
 
+// Faz o login do usuário, para que gere um token de autenticação.
 app.post("/auth", (req, res) => {
 	let { email, password } = req.body
 

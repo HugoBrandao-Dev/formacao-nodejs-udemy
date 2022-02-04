@@ -24,3 +24,15 @@ o que não é correto. Um objeto JS pode ser convertido em um JSON, desde que se
 valores de propriedades sejam aceitáveis pelo JSON (ele não aceita todos os tipo
 de valores que um objeto JS aceita). Sendo assim, a regra de encurtamento serve
 para OBJETOS JS, e não para JSON.
+
+No mini projeto do Capítulo 9 (Consumo de API rest com axios), algumas
+requisições feitas com o axios impedem que mensagens de alert(), funções e
+alterações no template sejam executadas, caso as requisições obtenham sucesso
+(dentro do bloco do response).
+Exemplos:
+* Exibir uma mensagem de sucesso (alert) na deleção de um item da lista;
+* Exibir uma mensagem de sucesso (alert) na criação de um novo item;
+* Mudar o estado do botão "Atualizar" (seu atributo disabled), depois de uma
+atualização ou cadastro de um novo item;
+* Colocar a CHAMADA de uma função que limpa os campos do formulário de
+cadastro/atualização, depois que cadastro ou atualizo um item.
