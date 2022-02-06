@@ -220,7 +220,7 @@ app.post("/auth", (req, res) => {
 					expiresIn: "2d"
 				}, (error, token) => {
 					if (error) {
-						res.status(400)
+						res.status(500)
 						res.json({ error: "Falha interna." })
 					} else {
 						res.status(200)
