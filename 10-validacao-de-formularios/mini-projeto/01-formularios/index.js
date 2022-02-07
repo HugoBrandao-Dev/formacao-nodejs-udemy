@@ -3,14 +3,16 @@ const app = express()
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const flash = require('express-flash')
+const cookieParser = require('cookie-parser')
 
 app.set('view engine', 'ejs')
 app.set('trust proxy', 1) // trust first proxy
+app.use(cookieParser("qwerjdl"))
 app.use(session({
 	secret: 'keyboard cat',
 	resave: false,
 	saveUninitialized: true,
-	cookie: { secure: true }
+	cookie: { maxAge: 60000 }
 }))
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
