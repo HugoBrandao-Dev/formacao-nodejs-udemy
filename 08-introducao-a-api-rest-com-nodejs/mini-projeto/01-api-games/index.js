@@ -94,9 +94,27 @@ let database = {
 // Lista todos os jogos cadastrados
 app.get("/games", auth, (req, res) => {
 
+	let HATEOAS = [
+		{
+			href: `http://localhost:4000/game/0`,
+			method: 'DELETE',
+			rel: 'delete_game'
+		},
+		{
+			href: `http:localhost:4000/game/0`,
+			method: 'GET',
+			rel: 'get_game'
+		},
+		{
+			href: 'http://localhost:4000/auth',
+			method: 'POST',
+			rel: 'login'
+		}
+	]
+
 	// Define o código de estatus na resposta
 	res.status(200)
-	res.json(database.games)
+	res.json({games: database.games, _links: HATEOAS})
 })
 
 // Busca por um jogo baseado no id informado na requisição
@@ -106,12 +124,35 @@ app.get("/game/:id", auth, (req, res) => {
 		if (!isNaN(paramsID)) {
 			let id = parseInt(paramsID)
 
+			let HATEOAS = [
+				{
+					href: `http://localhost:4000/game/${ id }`,
+					method: 'DELETE',
+					rel: 'delete_game'
+				},
+				{
+					href: `http:localhost:4000/game/${ id }`,
+					method: 'GET',
+					rel: 'get_game'
+				},
+				{
+					href: `http://localhost:4000/game/${ id }`,
+					method: 'PUT',
+					rel: 'edit_game'
+				},
+				{
+					href: `http://localhost:4000/games`,
+					method: 'GET',
+					rel: 'game_list'
+				}
+			]
+
 			// Faz a busca por um jogo que corresponda ao ID informado
 			let game = database.games.find(game => game.id === id)
 
 			if (game) {
 				res.status(200)
-				res.json({ game })
+				res.json({ game, _links: HATEOAS})
 			} else {
 				res.status(404)
 			}
