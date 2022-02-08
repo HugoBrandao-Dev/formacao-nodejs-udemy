@@ -19,8 +19,24 @@ app.use(bodyParser.json())
 app.use(flash())
 
 app.get("/", (req, res) => {
-	console.log('Está rodando!!')
-	res.render('index')
+
+	// Capturas dos flash-error passados
+	let emailError = req.flash('emailError')
+	let nomeError = req.flash('nomeError')
+	let pontosError = req.flash('pontosError')
+
+	/*
+		Capturas dos valores de cada campo, para que
+		eles estejam já preenchidos em caso de algum
+		campo estar inválido. Antes, o usuário era
+		redirecionado e obrigado a preencher todos os
+		campos novamente.
+	*/
+	let email = req.flash('email')
+	let nome = req.flash('nome')
+	let pontos = req.flash('pontos')
+
+	res.render('index', { email, emailError, nome, nomeError, pontos, pontosError })
 })
 
 app.post("/form", (req, res) => {
@@ -47,6 +63,17 @@ app.post("/form", (req, res) => {
 	}
 
 	if (emailError || nomeError || pontosError) {
+
+		// Flash-sessions que atenderão a cada um dos erros
+		req.flash('emailError', emailError)
+		req.flash('nomeError', nomeError)
+		req.flash('pontosError', pontosError)
+
+		req.flash('email', iptEmail)
+		req.flash('nome', iptNome)
+		req.flash('pontos', iptPontos)
+
+		// Para onde os flash-session serão enviados.
 		res.redirect('/')
 	} else {
 		res.send('O formulário está OK!!!')

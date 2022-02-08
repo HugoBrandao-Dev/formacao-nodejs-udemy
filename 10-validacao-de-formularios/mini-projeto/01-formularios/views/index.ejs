@@ -15,11 +15,26 @@
 		<div class="row">
 			<form method="POST" action="/form" class="form col-6">
 				<label>Email:</label>
-				<input type="email" name="iptEmail" id="iptEmail" class="form-control mb-3" placeholder="Informe seu email">
+				<input type="email" name="iptEmail" id="iptEmail" class="form-control mb-3" placeholder="Informe seu email" value="<%= email %>">
+				<% if (emailError.length !== 0) { %>
+					<div class="alert alert-danger" role="alert">
+						<%= emailError %>
+					</div>
+				<% } %>
 				<label>Nome:</label>
-				<input type="text" name="iptNome" id="iptNome" class="form-control mb-3" placeholder="Informe seu nome">
+				<input type="text" name="iptNome" id="iptNome" class="form-control mb-3" placeholder="Informe seu nome" value="<%= nome %>">
+				<% if (nomeError.length !== 0) { %>
+					<div class="alert alert-danger" role="alert">
+						<%= nomeError %>
+					</div>
+				<% } %>
 				<label>Pontos:</label>
-				<input type="number" name="iptPontos" id="iptPontos" class="form-control mb-3" placeholder="Informe seus pontos">
+				<input type="number" name="iptPontos" id="iptPontos" class="form-control mb-3" placeholder="Informe seus pontos" value="<%= pontos %>">
+				<% if (pontosError.length !== 0) { %>
+					<div class="alert alert-danger" role="alert">
+						<%= pontosError %>
+					</div>
+				<% } %>
 				<button type="submit" class="btn btn-primary">Enviar</button>
 			</form>
 		</div>
