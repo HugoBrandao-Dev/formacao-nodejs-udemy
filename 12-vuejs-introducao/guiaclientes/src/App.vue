@@ -45,7 +45,7 @@ export default {
 					idade:  32,
 					email: 'tobias32@gmail.com'
 				}
-			]
+			],
 		}
 	},
 	components: {

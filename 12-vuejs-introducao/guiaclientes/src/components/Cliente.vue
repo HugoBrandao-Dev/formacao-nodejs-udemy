@@ -5,6 +5,12 @@
 		<p><span>Email:</span> {{ cliente.email }}</p>
 		<p v-if="mostrarIdade"><span>Idade: </span> {{ cliente.idade }} anos</p>
 		<p v-else>O usuário escondeu a idade.</p>
+		<!--
+		$event é uma variável reservada do Vue, para passar informações de um
+		evento para dentro do método que é chamado todas as vezes que o evento
+		acontecer.
+		-->
+		<button type="button" @click="mudarCor($event)">Mudar cor!</button>
 	</div>
 </template>
 
@@ -13,6 +19,14 @@ export default {
 	data() {
 		return {
 			isPremium: false
+		}
+	},
+	methods: {
+		mudarCor: function(event) {
+			// O this é necessário para pegar as variáveis dentro de data()
+			this.isPremium = !this.isPremium
+
+			console.log(event)
 		}
 	},
 	props: {
