@@ -1,5 +1,17 @@
 <template>
   <div id="app">
+		<form class="form">
+			<fieldset>
+				<legend>Cadastro</legend>
+				<label>Nome:</label>
+				<input type="text" placeholder="Informe seu nome" v-model="nomeField">
+				<label>Email:</label>
+				<input type="email" placeholder="Informe seu email" v-model="emailField">
+				<label>Idade:</label>
+				<input type="number" min="0" max="150" v-model="idadeField">
+				<button type="button" @click="cadastrar">Cadastrar</button>
+			</fieldset>
+		</form>
 		<h1>Guia Cliente</h1>
 		<!-- O atributo especial :key é obrigatório para o v-for -->
 		<div class="clientes" v-for="(cliente, index) in clientes" :key="cliente.id">
@@ -20,6 +32,9 @@ export default {
   name: 'App',
 	data() {
 		return {
+			nomeField: null,
+			emailField: null,
+			idadeField: null,
 			clientes: [
 				{
 					id: 1,
@@ -48,6 +63,19 @@ export default {
 			],
 		}
 	},
+	methods: {
+		cadastrar: function() {
+			this.clientes.push({
+				id: Date.now(),
+				nome: this.nomeField,
+				email: this.emailField,
+				idade: this.idadeField
+			})
+			this.nomeField = null
+			this.emailField = null
+			this.idadeField = null
+		}
+	},
 	components: {
 		Cliente
 	}
@@ -55,5 +83,13 @@ export default {
 </script>
 
 <style>
-
+	.form fieldset {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	.form fieldset input {
+		margin-bottom: 10px;
+		outline: none;
+	}
 </style>
