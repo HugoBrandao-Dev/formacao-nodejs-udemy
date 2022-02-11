@@ -3,13 +3,13 @@
 		<!-- Utilizar : para colocar o valor de uma variável em um atributo -->
 		<form id="form-cliente">
 			<label>Nome: </label>
-			<input type="text" name="iptNome" class="ipt" :value="nome">
+			<input type="text" name="iptNome" class="ipt" v-model="nome">
 			<label>Idade: </label>
-			<input type="text" name="iptIdade" class="ipt" :value="idade">
+			<input type="text" name="iptIdade" class="ipt" v-model="idade">
 			<label>Telefone: </label>
-			<input type="tel" name="iptTelefone" class="ipt" :value="telefone">
+			<input type="tel" name="iptTelefone" class="ipt" v-model="telefone">
 			<label>Email: </label>
-			<input type="email" name="iptEmail" class="ipt" :value="email">
+			<input type="email" name="iptEmail" class="ipt" v-model="email">
 		</form>
 		<hr>
 		<h2 id="cliente-nome">Cliente aqui</h2>
