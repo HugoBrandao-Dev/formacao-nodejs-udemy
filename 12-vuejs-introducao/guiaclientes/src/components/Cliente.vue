@@ -1,24 +1,18 @@
 <template>
 	<div id="cliente">
-		<!-- Utilizar : para colocar o valor de uma variável em um atributo -->
-		<form id="form-cliente">
-			<label>Nome: </label>
-			<input type="text" name="iptNome" class="ipt" v-model="nome">
-			<label>Idade: </label>
-			<input type="text" name="iptIdade" class="ipt" v-model="idade">
-			<label>Telefone: </label>
-			<input type="tel" name="iptTelefone" class="ipt" v-model="telefone">
-			<label>Email: </label>
-			<input type="email" name="iptEmail" class="ipt" v-model="email">
-		</form>
-		<hr>
-		<h2 id="cliente-nome">Cliente aqui</h2>
-		<h3>Descrição cliente</h3>
-		<!-- Posso colocar expressões JavaScript que retornem algum valor -->
-		<p>Nome: {{ nome }}</p>
-		<p>Idade: {{ idade }} ano(s)</p>
-		<p>Telefone: {{ telefone }}</p>
-		<p>Email: {{ email }}</p>
+		<h3>Informações do cliente</h3>
+		<div class="cliente-info">
+			<!-- <p><span>Nome</span>: {{ nome }}</p>
+			<p><span>Idade</span>: {{ idade }}</p>
+			<p><span>Telefone</span> : {{ telefone }}</p>
+			<p><span>Email</span>: {{ email }}</p>
+			<p><span>Descrição</span>: {{ descricao }}</p> -->
+			<p><span>Nome</span>: {{ cliente.nome }}</p>
+			<p><span>Idade</span>: {{ cliente.idade }}</p>
+			<p><span>Telefone</span> : {{ cliente.telefone }}</p>
+			<p><span>Email</span>: {{ cliente.email }}</p>
+			<p><span>Descrição</span>: {{ descricao }}</p>
+		</div>
 	</div>
 </template>
 
@@ -27,11 +21,16 @@ export default {
 	// Habilita criar dados que podem ser usados dentro do template.
 	data() {
 		return {
-			nome: 'Tobias de Oliveira',
 			telefone: '(22) 22222-2222',
-			email: 'tobias@gmail.com',
-			idade: 21
+			descricao: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 		}
+	},
+	// Atributos que serão recebidos via props
+	props: {
+		// nome: String,
+		// email: String,
+		// idade: Number,
+		cliente: Object
 	}
 }
 </script>
@@ -42,22 +41,13 @@ scope indica que o estilo em questão só será aplicado a este componente.
 <style scoped>
 	#cliente {
 		padding: 10px;
-		color: green;
-		background-color: black;
+		background-color: #f2f2f2;
 		width: 600px;
 	}
 	#cliente-nome {
 		color: white;
 	}
-	#form-cliente {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-	}
-	#form-cliente .ipt {
-		margin-bottom: 10px;
-	}
-	#form-cliente .ipt:last-child {
-		margin-bottom: 0px;
+	#cliente .cliente-info span {
+		font-weight: bold;
 	}
 </style>
