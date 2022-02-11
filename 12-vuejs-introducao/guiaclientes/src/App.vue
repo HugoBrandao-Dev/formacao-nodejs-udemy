@@ -4,6 +4,15 @@
     <h1>Guia clientes</h1>
 		<Cliente class="cliente"
 			:cliente="cliente"
+			:mostrarIdade="true"
+		/>
+		<Cliente class="cliente"
+			:cliente="cliente"
+			:mostrarIdade="false"
+		/>
+		<Cliente class="cliente"
+			:cliente="cliente"
+			:mostrarIdade="true"
 		/>
 		<!-- <form class="form-tobias">
 			<h3>Info do Tobias</h3>

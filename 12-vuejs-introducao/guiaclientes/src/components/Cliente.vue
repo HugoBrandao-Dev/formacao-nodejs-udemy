@@ -8,7 +8,14 @@
 			<p><span>Email</span>: {{ email }}</p>
 			<p><span>Descrição</span>: {{ descricao }}</p> -->
 			<p><span>Nome</span>: {{ cliente.nome }}</p>
-			<p><span>Idade</span>: {{ cliente.idade }}</p>
+
+			<!-- Caso a condição seja falsA, o elemento SERÁ destruído. -->
+			<p v-if="mostrarIdade"><span>Idade</span>: {{ cliente.idade }}</p>
+			<!-- Também existe o v-else-if -->
+			<p v-else>A idade está escondida.</p>
+
+			<!-- Caso a condiçao seja falsa, o elemento NÃO SERÁ destruído. -->
+			<p v-show="!mostrarIdade"><span>Idade</span>: {{ cliente.idade }}</p>
 			<p><span>Telefone</span> : {{ cliente.telefone }}</p>
 			<p><span>Email</span>: {{ cliente.email }}</p>
 			<p><span>Descrição</span>: {{ descricao }}</p>
@@ -30,7 +37,8 @@ export default {
 		// nome: String,
 		// email: String,
 		// idade: Number,
-		cliente: Object
+		cliente: Object,
+		mostrarIdade: Boolean
 	}
 }
 </script>
