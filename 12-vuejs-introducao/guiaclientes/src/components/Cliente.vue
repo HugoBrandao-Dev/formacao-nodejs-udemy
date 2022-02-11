@@ -29,6 +29,7 @@ scope indica que o estilo em questão só será aplicado a este componente.
 	.cliente {
 		width: 500px;
 		padding: 5px;
+		margin-bottom: 10px;
 	}
 	.cliente span {
 		font-weight: bold;
