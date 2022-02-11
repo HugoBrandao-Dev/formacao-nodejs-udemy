@@ -36,3 +36,7 @@ Exemplos:
 atualização ou cadastro de um novo item;
 * Colocar a CHAMADA de uma função que limpa os campos do formulário de
 cadastro/atualização, depois que cadastro ou atualizo um item.
+
+No Capítulo de Vue JS - Introdução, só é possível ver os progressos das aulas
+através dos histórico de commits realizados, já que não separei cada aula em
+arquivos separados.
