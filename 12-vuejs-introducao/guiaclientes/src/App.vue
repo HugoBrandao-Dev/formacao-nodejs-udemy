@@ -23,7 +23,9 @@
 		</form>
 		<h1>Guia Cliente</h1>
 		<!-- O atributo especial :key é obrigatório para o v-for -->
-		<div class="clientes" v-for="(cliente, index) in clientes" :key="cliente.id">
+		<div class="clientes"
+			v-for="(cliente, index) in orderClientes" 
+			:key="cliente.id">
 			<p>Índice no array: {{ index }}</p>
 			<!--
 			@meDelete é um evento emitido pelo componente filho, e seu $event são os parâmetros adicionais passados pelo componente filho.
@@ -39,6 +41,7 @@
 
 <script>
 import Cliente from './components/Cliente'
+import _ from 'lodash'
 
 export default {
   name: 'App',
@@ -129,6 +132,13 @@ export default {
 	},
 	components: {
 		Cliente
+	},
+	computed: {
+		orderClientes: function() {
+			// orderBy é uma função de ordenação do lodash
+			//  _.orderBy([O QUE SE DEVE ORDENAR], [['PELO QUE ORDENAR']], [['TIPO DE ORDENAÇÃO']])
+			return _.orderBy(this.clientes, ['nome'], ['ASC'])
+		}
 	}
 }
 </script>
