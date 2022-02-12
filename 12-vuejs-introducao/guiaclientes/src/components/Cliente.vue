@@ -11,6 +11,7 @@
 		acontecer.
 		-->
 		<button type="button" @click="mudarCor($event)">Mudar cor!</button>
+		<button type="button" @click="emitirEventoDelete">Deletar</button>
 	</div>
 </template>
 
@@ -27,6 +28,21 @@ export default {
 			this.isPremium = !this.isPremium
 
 			console.log(event)
+		},
+		emitirEventoDelete: function() {
+			console.log('Emitindo do filho...')
+			// Emite um evento deste componente filho para o componente pai.
+			this.$emit("meDelete", {
+				idCliente: this.cliente.id,
+				curso: 'Formação NodeJS',
+				promocao: true,
+				// this = componente cliente (atributos e métodos desse componente)
+				component: this
+			})
+		},
+		testar: function() {
+			console.log('Testando para valer!')
+			alert("Isso é um alert!")
 		}
 	},
 	props: {

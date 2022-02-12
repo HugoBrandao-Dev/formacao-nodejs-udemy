@@ -25,7 +25,10 @@
 		<!-- O atributo especial :key é obrigatório para o v-for -->
 		<div class="clientes" v-for="(cliente, index) in clientes" :key="cliente.id">
 			<p>Índice no array: {{ index }}</p>
-			<Cliente :cliente="cliente"/>
+			<!--
+			@meDelete é um evento emitido pelo componente filho, e seu $event são os parâmetros adicionais passados pelo componente filho.
+			-->
+			<Cliente :cliente="cliente" @meDelete="deletarCliente($event)"/>
 			<h3>Edição:</h3>
 			<input type="text" v-model="cliente.nome">
 			<input type="email" v-model="cliente.email">
@@ -108,6 +111,20 @@ export default {
 			} else {
 				console.log('Erro na validação dos dados do formulário.')
 			}
+		},
+		deletarCliente: function($event) {
+			console.log('Evento recebido!')
+			let id = $event.idCliente
+
+			/*
+			O filter só joga para dentro do novo array, os dados que satisfaçam a
+			regra.
+			*/
+			let novoArray = this.clientes.filter(cliente => cliente.id != id)
+			this.clientes = novoArray
+
+			// Também é possível buscar uma função definida dentro do componente filho.
+			// $event.component.testar()
 		}
 	},
 	components: {
