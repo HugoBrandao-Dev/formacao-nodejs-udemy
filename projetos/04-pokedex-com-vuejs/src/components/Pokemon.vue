@@ -1,7 +1,24 @@
 <template>
 	<div class="pokemon">
-		<h1 class="pokemon-name">{{ num }} - {{ name }}</h1>
-		<small class="pokemon-url">{{  url }}</small>
+		<div class="card">
+			<div class="card-image">
+				<figure>
+					<img :src="pokemon.front" alt="Placeholder image">
+				</figure>
+			</div>
+			<div class="card-content">
+				<div class="media">
+					<div class="media-content">
+						<p class="title is-4">{{ num }} - {{ name | upper }}</p>
+						<p class="subtitle is-6">{{ pokemon.type }}</p>
+					</div>
+				</div>
+
+				<div class="content">
+
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -12,15 +29,21 @@ export default {
 	created: function() {
 		axios.get(this.url)
 			.then(response => {
+				/*
+				pokemon, dentro de data(), deve conter as mesmas propriedades (type, front e back) dentro de seu corpo, para que sejam exibidos no template
+				*/
 				this.pokemon.type = response.data.types[0].type.name
 				this.pokemon.front = response.data.sprites.front_default
 				this.pokemon.back = response.data.sprites.back_default
-				console.log(this.pokemon)
 			})
 	},
 	data() {
 		return {
-			pokemon: {}
+			pokemon: {
+				type: null,
+				front: null,
+				back: null
+			}
 		}
 	},
 	props: {
@@ -28,8 +51,6 @@ export default {
 		url: String,
 		num: Number
 	},
-	/*
-	Solução apresentada pelo professor
 	filters: {
 		upper: function(pokemonName) {
 			let primeiraLetraFormatada = pokemonName[0].toUpperCase()
@@ -37,14 +58,12 @@ export default {
 			return primeiraLetraFormatada + restanteCorpo
 		}
 	}
-	*/
+	
 }
 </script>
 
 <style>
-	/* Mesma funcionalidade do filtro upper, proposto pelo professor */
-	.pokemon .pokemon-name {
-		text-transform: capitalize;
-		font-weight: bold;
+	.pokemon {
+		margin-bottom: 15px;
 	}
 </style>
