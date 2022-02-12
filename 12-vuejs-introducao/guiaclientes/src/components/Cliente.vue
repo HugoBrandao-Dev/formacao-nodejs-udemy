@@ -2,7 +2,7 @@
 	<div :class="{cliente: true, 'cliente-premium': isPremium, 'cliente-comum': !isPremium }">
 		<h2>{{ cliente.nome }}</h2>
 		<hr>
-		<p><span>Email:</span> {{ cliente.email }}</p>
+		<p><span>Email:</span> {{ cliente.email | processarEmail() }}</p>
 		<p v-if="mostrarIdade"><span>Idade: </span> {{ cliente.idade }} anos</p>
 		<p v-else>O usuário escondeu a idade.</p>
 		<!--
@@ -43,6 +43,13 @@ export default {
 		testar: function() {
 			console.log('Testando para valer!')
 			alert("Isso é um alert!")
+		}
+	},
+	filters: {
+		// Não altera o valor real da variavel email
+		processarEmail: function(email) {
+			// Deve sempre retornar algo.
+			return email.toUpperCase()
 		}
 	},
 	props: {
