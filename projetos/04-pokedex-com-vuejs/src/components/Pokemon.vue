@@ -3,7 +3,7 @@
 		<div class="card">
 			<div class="card-image">
 				<figure>
-					<img :src="pokemon.front" alt="Placeholder image">
+					<img :src="currentImage" alt="Placeholder image">
 				</figure>
 			</div>
 			<div class="card-content">
@@ -15,7 +15,7 @@
 				</div>
 
 				<div class="content">
-
+					<button class="button is-small" @click="mudarSprite">Mudar sprite</button>
 				</div>
 			</div>
 		</div>
@@ -34,11 +34,14 @@ export default {
 				*/
 				this.pokemon.type = response.data.types[0].type.name
 				this.pokemon.front = response.data.sprites.front_default
+				this.currentImage = this.pokemon.front
 				this.pokemon.back = response.data.sprites.back_default
 			})
 	},
 	data() {
 		return {
+			isFront: true,
+			currentImage: null,
 			pokemon: {
 				type: null,
 				front: null,
@@ -57,8 +60,13 @@ export default {
 			let restanteCorpo = pokemonName.slice(1)
 			return primeiraLetraFormatada + restanteCorpo
 		}
+	},
+	methods: {
+		mudarSprite: function() {
+			this.isFront = !this.isFront
+			this.currentImage = this.isFront ? this.pokemon.front : this.pokemon.back
+		}
 	}
-	
 }
 </script>
 
