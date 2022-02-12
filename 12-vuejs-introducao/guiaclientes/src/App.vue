@@ -3,12 +3,21 @@
 		<form class="form">
 			<fieldset>
 				<legend>Cadastro</legend>
-				<label>Nome:</label>
-				<input type="text" placeholder="Informe seu nome" v-model="nomeField">
-				<label>Email:</label>
-				<input type="email" placeholder="Informe seu email" v-model="emailField">
-				<label>Idade:</label>
-				<input type="number" min="0" max="150" v-model="idadeField">
+				<div class="ipt-control">
+					<label>Nome:</label>
+					<input type="text" placeholder="Informe seu nome" name="iptNome" v-model="nomeField">
+					<small id="nomeError" class="msgError" v-if="nomeError">Nome é inválido</small>
+				</div>
+				<div class="ipt-control">
+					<label>Email:</label>
+					<input type="email" placeholder="Informe seu email" name="iptEmail" v-model="emailField">
+					<small id="emailError" class="msgError" v-if="emailError">Email é inválido</small>
+				</div>
+				<div class="ipt-control">
+					<label>Idade:</label>
+					<input type="number" min="1" max="150" name="iptIdade" v-model="idadeField">
+					<small id="idadeError" class="msgError" v-if="idadeError">Idade é inválido</small>
+				</div>
 				<button type="button" @click="cadastrar">Cadastrar</button>
 			</fieldset>
 		</form>
@@ -33,8 +42,11 @@ export default {
 	data() {
 		return {
 			nomeField: null,
+			nomeError: false,
 			emailField: null,
+			emailError: false,
 			idadeField: null,
+			idadeError: false,
 			clientes: [
 				{
 					id: 1,
@@ -57,23 +69,45 @@ export default {
 				{
 					id: 4,
 					nome: 'Tobias de Oliveira',
-					idade:  32,
+					idade: 32,
 					email: 'tobias32@gmail.com'
 				}
 			],
 		}
 	},
 	methods: {
+		isDadosValidos: function() {
+			if (!this.nomeField || !isNaN(this.nomeField)) {
+				this.nomeError = true
+			} else {
+				this.nomeError = false
+			}
+
+			if (!this.emailField) {
+				this.emailError = true
+			} else {
+				this.emailError = false
+			}
+
+			if (!this.idadeField || (this.idadeField <= 0 || this.idadeField > 150)) {
+				this.idadeError = true
+			} else {
+				this.idadeError = false
+			}
+
+			return !this.nomeError && !this.emailError && !this.idadeError
+		},
 		cadastrar: function() {
-			this.clientes.push({
-				id: Date.now(),
-				nome: this.nomeField,
-				email: this.emailField,
-				idade: this.idadeField
-			})
-			this.nomeField = null
-			this.emailField = null
-			this.idadeField = null
+			if (this.isDadosValidos()) {
+				this.clientes.push({
+					id: Date.now(),
+					nome: this.nomeField,
+					idade: this.idadeField,
+					email: this.emailField
+				})
+			} else {
+				console.log('Erro na validação dos dados do formulário.')
+			}
 		}
 	},
 	components: {
@@ -83,13 +117,15 @@ export default {
 </script>
 
 <style>
-	.form fieldset {
+	.form fieldset, form fieldset .ipt-control {
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
 	}
-	.form fieldset input {
+	.form fieldset .ipt-control {
 		margin-bottom: 10px;
-		outline: none;
+	}
+	.form .ipt-control .msgError {
+		color: red;
 	}
 </style>
