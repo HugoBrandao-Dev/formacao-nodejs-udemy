@@ -45,3 +45,8 @@ No final do Capítulo de Vue JS - Introdução, o professor nos ensina a como
 instalar o framework CSS Bulma, para que pudessemos usá-lo na próxima aula,
 mas não há uma aula seguinte sobre o assunto, o capítulo termina nessa mesma
 aula, partindo direto para o próximo Capítulo (Projeto Pokédex).
+
+Na aula "Importando imagens" do Capítulo referente ao projeto 04 (Pokedex),
+o professor utilizou uma imagem própria (do Guia do Programador) de banner,
+e não disponibilizou essa mesma para download, sendo assim, foi utilizada 
+a imagem "logo.png" do proprio projeto base do Vue JS para substituí-la.

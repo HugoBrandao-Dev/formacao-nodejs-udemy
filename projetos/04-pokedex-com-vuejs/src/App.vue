@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+		<img src="./assets/logo.png" alt="Logo do Vue" title="Este é um projeto que utiliza o framework Vue JS.">
+		<hr>
+		<h1 class="is-size-1">Porkedex</h1>
 		<div class="column is-half is-offset-one-quarter">
 			<div class="pokemons" v-for="(pokemon, index) in pokemons" :key="index">
 				<Pokemon :name="pokemon.name" :url="pokemon.url" :num="index + 1" />
