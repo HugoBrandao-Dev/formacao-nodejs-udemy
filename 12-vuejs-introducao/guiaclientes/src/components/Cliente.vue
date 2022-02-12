@@ -12,6 +12,7 @@
 		-->
 		<button type="button" @click="mudarCor($event)">Mudar cor!</button>
 		<button type="button" @click="emitirEventoDelete">Deletar</button>
+		<p>ID Especial: {{ idEspecial }}</p>
 	</div>
 </template>
 
@@ -50,6 +51,14 @@ export default {
 		processarEmail: function(email) {
 			// Deve sempre retornar algo.
 			return email.toUpperCase()
+		}
+	},
+	// Computed Properties atuam como variáveis.
+	computed: {
+		idEspecial: function() {
+
+			// DEVEM retornar algo.
+			return (this.cliente.email + this.cliente.nome + this.cliente.id).toUpperCase()
 		}
 	},
 	props: {
