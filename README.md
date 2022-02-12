@@ -40,3 +40,8 @@ cadastro/atualização, depois que cadastro ou atualizo um item.
 No Capítulo de Vue JS - Introdução, só é possível ver os progressos das aulas
 através dos histórico de commits realizados, já que não separei cada aula em
 arquivos separados.
+
+No final do Capítulo de Vue JS - Introdução, o professor nos ensina a como 
+instalar o framework CSS Bulma, para que pudessemos usá-lo na próxima aula,
+mas não há uma aula seguinte sobre o assunto, o capítulo termina nessa mesma
+aula, partindo direto para o próximo Capítulo (Projeto Pokédex).
