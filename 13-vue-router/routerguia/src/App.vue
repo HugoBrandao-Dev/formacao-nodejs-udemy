@@ -5,10 +5,8 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
-		<h1>Início rota</h1>
 		<!-- Esse componente é reponsável por renderizar um conteúdo de rotas -->
     <router-view/>
-		<h2>Fim rota</h2>
   </div>
 </template>
 
