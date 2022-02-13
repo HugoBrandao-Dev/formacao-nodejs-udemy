@@ -8,6 +8,12 @@
 			<button>Teste</button>
 		</form>
 		<p>{{ parametroRota }}</p>
+
+		<!--
+		Rota filha da aula Nested Routes, que rederiza, novamente, o 
+		componente About
+		-->
+		<router-view></router-view>
 	</div>
 </template>
 
@@ -18,7 +24,7 @@ export default {
 		Pega o parâmetro passado na URL, essa configuração foi definida no 
 		index.js da pasta router.
 		*/
-		this.parametroRota = this.$route.params.dado
+		// this.parametroRota = this.$route.params.dado
 	},
 	data() {
 		return {
@@ -35,6 +41,7 @@ export default {
 		justify-content: space-between;
 		align-items: center;
 		width: 200px;
+		margin: auto;
 	}
 	form input {
 		width: 100%;

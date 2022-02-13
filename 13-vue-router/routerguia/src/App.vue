@@ -1,12 +1,15 @@
 <template>
   <div id="app">
     <div id="nav">
+			
 			<!-- Funcionam como a tag <a>, criando link para o roteamento -->
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> | 
+			
 			<!-- Router link que recebe os valores de forma dinâmica -->
 			<router-link :to="{name: 'Cadastro', params: {dado: '21'}}">Cadastro</router-link>
     </div>
+		
 		<!-- Esse componente é reponsável por renderizar um conteúdo de rotas -->
     <router-view/>
   </div>

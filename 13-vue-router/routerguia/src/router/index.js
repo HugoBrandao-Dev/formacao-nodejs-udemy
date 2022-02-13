@@ -18,9 +18,17 @@ const routes = [
     component: About
   },
 	{
-		path: '/cadastro/:dado',
+		path: '/cadastro',
 		name: 'Cadastro',
-		component: Cadastro
+		component: Cadastro,
+		children: [
+			{
+				// O path do rota filha não precisa de / no início.
+				path: 'about',
+				name: 'AboutCadastro',
+				component: About
+			}
+		]
 	}
 ]
 
