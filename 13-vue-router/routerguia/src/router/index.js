@@ -18,7 +18,7 @@ const routes = [
     component: About
   },
 	{
-		path: '/cadastro',
+		path: '/cadastro/:dado',
 		name: 'Cadastro',
 		component: Cadastro
 	}

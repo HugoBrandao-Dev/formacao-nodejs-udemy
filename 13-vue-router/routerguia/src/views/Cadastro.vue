@@ -1,12 +1,32 @@
 <template>
-	<form>
-		<label>Email:</label>
-		<input type="email" name="email" id="iptEmail" placeholder="Informe seu email">
-		<label>Nome:</label>
-		<input type="text" name="nome" id="iptNome" placeholder="Informe seu nome">
-		<button>Teste</button>
-	</form>
+	<div>
+		<form>
+			<label>Email:</label>
+			<input type="email" name="email" id="iptEmail" placeholder="Informe seu email">
+			<label>Nome:</label>
+			<input type="text" name="nome" id="iptNome" placeholder="Informe seu nome">
+			<button>Teste</button>
+		</form>
+		<p>{{ parametroRota }}</p>
+	</div>
 </template>
+
+<script>
+export default {
+	created() {
+		/*
+		Pega o parâmetro passado na URL, essa configuração foi definida no 
+		index.js da pasta router.
+		*/
+		this.parametroRota = this.$route.params.dado
+	},
+	data() {
+		return {
+			parametroRota: null
+		}
+	}
+}
+</script>
 
 <style scoped>
 	form {
