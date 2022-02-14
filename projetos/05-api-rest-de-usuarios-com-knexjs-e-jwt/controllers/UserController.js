@@ -1,3 +1,5 @@
+const User = require('../models/User')
+
 class UserController {
 	async index(req, res) {}
 
@@ -13,9 +15,21 @@ class UserController {
 			} else {
 				res.json({error: 'Senha inválida.'})
 			}
+
+			// Para (parar) uma requisição
+			return
 		} else {
-			res.status(200)
-			res.send("Tudo OK!")
+
+			// O findEmail retorna true ou false se houver ou não um registro com o email.
+			let emailExists = await User.findEmail(email)
+			if (emailExists) {
+				res.status(406)
+				res.json({error: 'Email já cadastrado.'})
+			} else {
+				await User.new(name, email, password)
+				res.status(200)
+				res.send("Tudo OK!")
+			}
 		}
 	}
 }
