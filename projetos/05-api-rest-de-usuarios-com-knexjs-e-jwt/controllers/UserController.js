@@ -15,7 +15,24 @@ class UserController {
 			res.json(user)
 		} else {
 			res.status(404)
-			res.json({error: 'Usuário não encontrado.'})
+			res.json({ error: 'Usuário não encontrado.' })
+		}
+	}
+
+	async edit(req, res) {
+		let { id, name, email, role } = req.body
+		let result = await User.update(id, name, email, role)
+		if (result) {
+			if (result.status) {
+				res.status(200)
+				res.send("Usuário editado com sucesso.")
+			} else {
+				res.status(406)
+				res.json({ error: result.error })
+			}
+		} else {
+			res.status(500)
+			res.json({ error: 'Erro no servidor.' })
 		}
 	}
 

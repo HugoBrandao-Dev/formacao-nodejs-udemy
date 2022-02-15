@@ -25,6 +25,45 @@ class User {
 		}
 	}
 
+	async update(id, name, email, role) {
+		let user = await this.findById(id)
+		if (user) {
+				let editUser = {}
+
+				if (email != undefined)  {
+					let result = await this.findEmail(email)
+
+					// Verifica se o novo email passado já exite no banco de dados.
+					if (result == false) {
+						return { status: false, error: "O email já exite."}
+					} else {
+						editUser.email = email
+					}
+				}
+				if (name != undefined) {
+					editUser.name = name
+				}
+				if (role != undefined) {
+					editUser.role = role
+				}
+
+				try {
+					await knex.update({ ...editUser })
+										.where({id: id})
+										.table('users')
+					return { status: true }
+				} catch (e) {
+					console.log(e)
+					return { status: false, error: e }
+				}
+				// await knex.where({ id })
+				// .update({ name, email, role })
+				// .table('users')
+		} else {
+			return { status: false, error: "O usuário não existe." }
+		}
+	}
+
 	async new(name, email, password) {
 		try {
 
