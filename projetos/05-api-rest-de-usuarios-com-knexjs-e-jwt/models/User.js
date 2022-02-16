@@ -64,6 +64,21 @@ class User {
 		}
 	}
 
+	async delete(id) {
+		let result = await this.findById(id)
+		if (result) {
+			try {
+				await knex.delete().where({id: id}).table('users')
+				return { status: true }
+			} catch (e) {
+				console.log(e)
+				return { status: false, error: 'Erro interno durante a deleção do usuário.' }
+			}
+		} else {
+			return { status: false, error: 'O usuário não foi encontrado.' }
+		}
+	}
+
 	async new(name, email, password) {
 		try {
 
