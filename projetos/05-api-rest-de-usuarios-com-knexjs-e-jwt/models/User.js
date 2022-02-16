@@ -124,7 +124,7 @@ class User {
 	// Este método retorna todas as informações do usuário que é dono o email.
 	async findByEmail(email) {
 		try {
-			let result = await knex.select(['id', 'name', 'email', 'role'])
+			let result = await knex.select(['id', 'name', 'email', 'password' ,'role'])
 															.where({ email: email })
 															.table('users')
 			if (result.length === 1) {

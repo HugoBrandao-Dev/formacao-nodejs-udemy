@@ -1,5 +1,9 @@
 const User = require('../models/User')
 const PasswordToken = require('../models/PasswordToken')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+
+let secret = 'fwjfjpwejvnnvjknkkmcmksldm'
 
 class UserController {
 	async index(req, res) {
@@ -113,6 +117,28 @@ class UserController {
 		} else {
 			res.status(406)
 			res.send('Token inválido.')
+		}
+	}
+
+	async login(req, res) {
+		let { email, password } = req.body
+		let user = await User.findByEmail(email)
+		if (user) {
+			let result = await bcrypt.compare(password, user.password)
+			if (result) {
+
+				// Gera um token
+				let token = jwt.sign({ email: user.email, role: user.role}, secret)
+
+				res.status(200)
+				res.json({ token })
+			} else {
+				res.status(406)
+				res.json({ error: 'Senha inválida.'})
+			}
+		} else {
+			res.status(404)
+			res.json({ error: 'Usuário não encontrado.' })
 		}
 	}
 }
