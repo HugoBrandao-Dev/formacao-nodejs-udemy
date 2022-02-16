@@ -99,6 +99,10 @@ class User {
 		}
 	}
 
+	/*
+	Este método somente diz se "tem um email cadastrado" (true ou false), mas não
+	retorna qual.
+	*/
 	async findEmail(email) {
 		try {
 			let result = await knex.select("*").from("users").where({ email })
@@ -113,6 +117,23 @@ class User {
 		} catch (e) {
 			console.log(e)
 			return false
+		}
+	}
+
+	// Este método retorna todas as informações do usuário que é dono o email.
+	async findByEmail(email) {
+		try {
+			let result = await knex.select(['id', 'name', 'email', 'role'])
+															.where({ email: email })
+															.table('users')
+			if (result.length === 1) {
+				return result[0]
+			} else {
+				return undefined
+			}
+		} catch (e) {
+			console.log(e)
+			return undefined
 		}
 	}
 }
