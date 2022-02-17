@@ -21,8 +21,6 @@ class User {
 		} catch (e) {
 			console.log(e)
 			return []
-		} finally {
-
 		}
 	}
 
