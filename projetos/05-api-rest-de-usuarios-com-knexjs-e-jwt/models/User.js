@@ -95,8 +95,10 @@ class User {
 
 			// role 0 = usuário comum.
 			await knex.insert({ name, email, password: hash, role: 0 }).table('users')
+			return { status: true }
 		} catch (e) {
-			console.log(e)
+			return { status: false, error: 'Erro interno.' }
+			// console.log(e)
 		}
 	}
 

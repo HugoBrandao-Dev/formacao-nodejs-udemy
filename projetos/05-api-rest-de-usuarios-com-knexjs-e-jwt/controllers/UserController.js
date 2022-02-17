@@ -76,9 +76,14 @@ class UserController {
 				res.status(406)
 				res.json({error: 'Email já cadastrado.'})
 			} else {
-				await User.new(name, email, password)
-				res.status(200)
-				res.send("Tudo OK!")
+				let result = await User.new(name, email, password)
+				if (result.status) {
+					res.status(200)
+					res.send("Tudo OK!")
+				} else {
+					res.status(500)
+					res.send(result.error)
+				}
 			}
 		}
 	}
