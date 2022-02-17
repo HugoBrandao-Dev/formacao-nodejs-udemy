@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import Register from '../views/Register.vue'
 import Login from '../views/Login.vue'
+import Users from '../views/Users.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,24 @@ const routes = [
 		path: '/login',
 		name: 'Login',
 		component: Login
+	},
+	{
+		path: '/admin/users',
+		name: 'Users',
+		component: Users,
+
+		// Router guard, que é executado antes de entrar na página.
+		beforeEnter: (to, from, next ) => {
+			if(localStorage.getItem('TokenAPIUser')) {
+
+				// Prossegue com a requisição, caso encontre o token no localStorage
+				next()
+			} else {
+				console.log('Token não encontrado.')
+				// Caso não seja encontrado o token, o usuário será redirecionado para a tela de login.
+				next('/login')
+			}
+		}
 	}
 ]
 
