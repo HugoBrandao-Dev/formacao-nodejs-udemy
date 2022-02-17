@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
 	data() {
 		return {
@@ -30,9 +32,17 @@ export default {
 	},
 	methods: {
 		register: function() {
-			console.log(this.name)
-			console.log(this.email)
-			console.log(this.password)
+			axios.post('http://localhost:4000/user', {
+				name: this.name,
+				email: this.email,
+				password: this.password
+			}).then(res => {
+					console.log(res)
+				})
+				.catch(error => {
+					let msgError = error.response.data.err
+					console.log(msgError)
+				})
 		}
 	}
 }
