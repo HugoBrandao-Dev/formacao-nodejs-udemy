@@ -1,24 +1,24 @@
 <template>
   <div id="divRegister">
 		<h1 class="title is-1">Registro de usuário</h1>
-		<hr>
-		<form>
 			<div class="columns is-mobile is-centered">
 				<div class="column is-half">
-					<div class="notification is-danger mt-2" v-if="error">
-						{{ error }}
-					</div>
-					<label>Nome</label>
-					<input type="text" name="iptName" class="input" placeholder="Informe seu nome" v-model="name">
-					<label>E-mail</label>
-					<input type="email" name="iptEmail" class="input" placeholder="exemplo@email.com" v-model="email">
-					<label>Senha</label>
-					<input type="password" name="iptPassword" class="input" v-model="password">
-					<hr>
-					<button type="button" class="button is-success" @click="register">Cadastrar</button>
+					<form>
+						<hr>
+						<div class="notification is-danger mt-2" v-if="error">
+							{{ error }}
+						</div>
+						<label>Nome:</label>
+						<input type="text" name="iptName" class="input" placeholder="Informe seu nome" v-model="name">
+						<label>E-mail:</label>
+						<input type="email" name="iptEmail" class="input" placeholder="exemplo@email.com" v-model="email">
+						<label>Senha:</label>
+						<input type="password" name="iptPassword" class="input" v-model="password">
+						<hr>
+						<button type="button" class="button is-success" @click="register">Cadastrar</button>
+					</form>
 				</div>
 			</div>
-		</form>
   </div>
 </template>
 
