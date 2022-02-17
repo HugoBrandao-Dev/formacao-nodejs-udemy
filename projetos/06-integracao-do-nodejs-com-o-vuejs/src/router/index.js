@@ -6,6 +6,36 @@ import Register from '../views/Register.vue'
 import Login from '../views/Login.vue'
 import Users from '../views/Users.vue'
 
+import axios from 'axios'
+
+function AdminAuth(to, from, next ) {
+	if(localStorage.getItem('TokenAPIUser')) {
+		let req = {
+			headers: {
+				'Authorization': `Bearer ${ localStorage.getItem('TokenAPIUser') }`
+			}
+		}
+
+		// Faz a validação do token passado
+		axios.post('http://localhost:4000/validate',{}, req)
+			.then(res => {
+				console.log(res)
+				next()
+			})
+			.catch(error => {
+				console.log(error)
+				next('/login')
+			})
+
+		// Prossegue com a requisição, caso encontre o token no localStorage
+		next()
+	} else {
+		console.log('Token não encontrado.')
+		// Caso não seja encontrado o token, o usuário será redirecionado para a tela de login.
+		next('/login')
+	}
+}
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -35,17 +65,7 @@ const routes = [
 		component: Users,
 
 		// Router guard, que é executado antes de entrar na página.
-		beforeEnter: (to, from, next ) => {
-			if(localStorage.getItem('TokenAPIUser')) {
-
-				// Prossegue com a requisição, caso encontre o token no localStorage
-				next()
-			} else {
-				console.log('Token não encontrado.')
-				// Caso não seja encontrado o token, o usuário será redirecionado para a tela de login.
-				next('/login')
-			}
-		}
+		beforeEnter: AdminAuth
 	}
 ]
 
