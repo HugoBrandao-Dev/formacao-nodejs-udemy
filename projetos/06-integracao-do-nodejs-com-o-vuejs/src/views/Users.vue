@@ -1,71 +1,101 @@
 <template>
-	<div id="divUsers">
-		<h1 class="title is-1">Usuários</h1>
-		<div class="columns is-mobile is-centered">
-			<div class="column is-half">		
-				<table class="table">
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>Nome</th>
-							<th>Email</th>
-							<th>Cargo</th>
-							<th>Ações</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr v-for="user in users" :key="user.id">
-							<td>{{ user.id }}</td>
-							<td>{{ user.nome }}</td>
-							<td>{{ user.email }}</td>
-							<td>{{ user.role | formatRole }}</td>
-							<td>
-								<button class="button is-warning">Editar</button>
-								<button class="button is-danger ml-3">Deletar</button>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
+  <div id="divUsers">
+    <h1 class="title is-1">Usuários</h1>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Email</th>
+              <th>Cargo</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="user in users" :key="user.id">
+              <td>{{ user.id }}</td>
+              <td>{{ user.name }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.role | formatRole }}</td>
+              <td>
+                <button class="button is-warning">Editar</button>
+                <button class="button is-danger ml-3" @click="showModal(user.id)">Deletar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    <div :class="{'modal': true, 'is-active': isShowDeleteModal}">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">Atenção</p>
+            <button class="card-header-icon" aria-label="more options">
+              <span class="icon">
+                <i class="fas fa-angle-down" aria-hidden="true"></i>
+              </span>
+            </button>
+          </header>
+          <div class="card-content">
+            <div class="content">
+              Deseja realmente deletar o usuário?
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="#" class="card-footer-item">OK</a>
+            <a href="#" class="card-footer-item" @click="hiddenModal">Cancel</a>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 
 export default {
-	data() {
-		return {
-			users: null
-		}
-	},
-	created: function() {
-		let req = {
-			headers: {
-				'Authorization': `Bearer ${ localStorage.getItem('TokenAPIUser') }`
-			}
-		}
+  data() {
+    return {
+      users: null,
+			isShowDeleteModal: false
+    };
+  },
+  created: function () {
+    let req = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("TokenAPIUser")}`,
+      },
+    };
 
-		axios.get('http://localhost:4000/user', req)
-			.then(res => {
-				this.users = res.data
-			})
-			.catch(error => {
-				console.log(error)
-			})
-	},
-	filters: {
-		formatRole(value) {
-			if (value == 1) {
-				return "Administrador(a)"
-			}
-			return "Usuário(a)"
+    axios
+      .get("http://localhost:4000/user", req)
+      .then((res) => {
+        this.users = res.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+  filters: {
+    formatRole(value) {
+      if (value == 1) {
+        return "Administrador(a)";
+      }
+      return "Usuário(a)";
+    },
+  },
+	methods: {
+		hiddenModal: function() {
+			this.isShowDeleteModal = false
+		},
+		showModal: function(id) {
+			console.log(`O user tem ID: ${ id }.`)
+			this.isShowDeleteModal = true
 		}
 	}
-}
+};
 </script>
 
 <style>
-
 </style>
