@@ -42,7 +42,7 @@
             </div>
           </div>
           <footer class="card-footer">
-            <a href="#" class="card-footer-item">OK</a>
+            <a href="#" class="card-footer-item" @click="deleteUser">OK</a>
             <a href="#" class="card-footer-item" @click="hiddenModal">Cancel</a>
           </footer>
         </div>
@@ -58,18 +58,13 @@ export default {
   data() {
     return {
       users: null,
-			isShowDeleteModal: false
+			isShowDeleteModal: false,
+			deleteUserID: null
     };
   },
   created: function () {
-    let req = {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("TokenAPIUser")}`,
-      },
-    };
-
     axios
-      .get("http://localhost:4000/user", req)
+      .get("http://localhost:4000/user", this.getAuthorization())
       .then((res) => {
         this.users = res.data;
       })
@@ -90,10 +85,36 @@ export default {
 			this.isShowDeleteModal = false
 		},
 		showModal: function(id) {
-			console.log(`O user tem ID: ${ id }.`)
+			this.deleteUserID = id
 			this.isShowDeleteModal = true
+		},
+		getAuthorization: function() {
+			return {
+				headers: {
+					Authorization: `Bearer ${ localStorage.getItem('TokenAPIUser') }`
+				}
+			}
+    },
+		deleteUser: function() {
+			axios.delete(`http://localhost:4000/user/${ this.deleteUserID }`, this.getAuthorization())
+				.then(res => {
+
+					// Depois de fazer a deleção, a tabela será atualizada.
+					axios.get('http://localhost:4000/user', this.getAuthorization())
+						.then(res => {
+							this.users = res.data
+						})
+						.catch(error => {
+							console.log(error)
+						})
+					console.log(res)
+				})
+				.catch(error => {
+					console.log(error)
+				})
+			this.isShowDeleteModal = false
 		}
-	}
+	},
 };
 </script>
 
