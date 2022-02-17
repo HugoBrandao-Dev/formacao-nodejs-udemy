@@ -5,6 +5,7 @@ import About from '../views/About.vue'
 import Register from '../views/Register.vue'
 import Login from '../views/Login.vue'
 import Users from '../views/Users.vue'
+import Edit from '../views/Edit.vue'
 
 import axios from 'axios'
 
@@ -65,6 +66,12 @@ const routes = [
 		component: Users,
 
 		// Router guard, que é executado antes de entrar na página.
+		beforeEnter: AdminAuth
+	},
+	{
+		path: '/edit/:id',
+		name: 'Edit',
+		component: Edit,
 		beforeEnter: AdminAuth
 	}
 ]
