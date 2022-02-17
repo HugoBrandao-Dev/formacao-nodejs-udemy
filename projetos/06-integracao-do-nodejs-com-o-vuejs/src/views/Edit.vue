@@ -13,8 +13,8 @@
 						<label>Cargo: </label>
 						<div class="select is-info is-small">
 							<select name="sltCargo" v-model="role">
-								<option value="1">Administrador</option>
-								<option value="0">Usuário comum</option>
+								<option value="1">Administrador(a)</option>
+								<option value="0">Usuário(a) comum</option>
 							</select>
 						</div>
 					</div>
