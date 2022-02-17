@@ -23,8 +23,8 @@ module.exports = function(req, res, next) {
 			}
 		} catch (e) {
 			console.log(e)
-			res.status(500)
-			res.json({ error: e })
+			res.status(400)
+			res.json({ error: 'Token inválido' })
 		}
 	} else {
 		res.status(403)
