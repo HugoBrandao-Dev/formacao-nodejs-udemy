@@ -1,0 +1,16 @@
+{
+  "name": "14-socket-io-2-introducao",
+  "version": "1.0.0",
+  "description": "Introdução aos Web Sockets",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hugo da Rocha Brandão",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "socket.io": "^4.4.1"
+  }
+}
