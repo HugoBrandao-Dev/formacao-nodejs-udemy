@@ -11,9 +11,15 @@ app.set('view engine', 'ejs')
 
 // Web Socket
 io.on('connection', socket => {
+	
 	socket.on('disconnect', () => {
 		console.log(`${ socket.id } se desconectou.`)
 	})
+
+	socket.on('msg', data => {
+		socket.emit('showmsg', data)
+	})
+	
 })
 
 // Rotas
