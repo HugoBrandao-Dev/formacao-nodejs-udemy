@@ -19,7 +19,7 @@
 						</div>
 					</div>
 					<hr>
-          <button type="button" class="button is-warning">Enviar</button>
+          <button type="button" class="button is-warning" @click="update">Enviar</button>
         </form>
       </div>
     </div>
@@ -32,6 +32,7 @@ import axios from 'axios'
 export default {
 	data() {
 		return {
+			id: null,
 			name: null,
 			email: null,
 			role: null
@@ -46,9 +47,15 @@ export default {
 			}
 		},
 		update: function() {
-			axios.put('http://localhost:4000/user')
+			axios.put('http://localhost:4000/user', {
+				id: this.id,
+				name: this.name,
+				email: this.email,
+				role: this.role
+			}, this.getAuthorization())
 				.then(res => {
 					console.log(res)
+					this.$router.push({ name: 'Users'})
 				})
 				.catch(error => {
 					console.log(error)
@@ -58,6 +65,7 @@ export default {
 	created() {
 		axios.get(`http://localhost:4000/user/${ this.$route.params.id }`, this.getAuthorization())
 			.then(res => {
+				this.id = res.data.id
 				this.name = res.data.name
 				this.email = res.data.email
 				this.role = res.data.role
