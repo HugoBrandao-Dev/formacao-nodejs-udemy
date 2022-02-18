@@ -11,9 +11,9 @@
 	<div id="chat">
 
 	</div>
-	<input type="text" id="msg"><br>
-	<input type="text" id="username" placeholder="Seu nome de usuário"><br>
-	<button type="button">Enviar</button><br>
+	<input type="text" id="iptMsg"><br>
+	<input type="text" id="iptUsername" placeholder="Seu nome de usuário"><br>
+	<button type="button" id="btnEnviar">Enviar</button><br>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
 	<script>
@@ -22,6 +22,19 @@
 		socket.on('disconnect', () => {
 			console.log('Desconectado')
 		})
+
+		const btnEnviar = document.querySelector('button#btnEnviar')
+		btnEnviar.addEventListener('click', enviar)
+
+		function enviar() {
+			let iptMsg = document.querySelector('input#iptMsg')
+			let iptUsername = document.querySelector('input#iptUsername')
+
+			let msg = iptMsg.value
+			let username = iptUsername.value
+
+			socket.emit('msg', { msg, username })
+		}
 	</script>
 </body>
 </html>
