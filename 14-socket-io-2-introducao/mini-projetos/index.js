@@ -13,12 +13,27 @@ app.get("/", (req, res) => {
 	res.render('index')
 })
 
-// "socket" (função anonima) é uma instância do cliente.
+// "socket" (função anonima) é uma instância do cliente (a conexão com o cliente).
 io.on('connection', socket => {
-	console.log(socket)
+	// console.log(socket)
 
 	// O cliente, que se conecta, tem um id único.
-	console.log(socket.id)
+	// console.log(socket.id)
+
+	/* ========== CAPTURA DE EVENTOS PELO SOCKET.IO ========== */
+
+	// Ficará escutando o 'boasvindas'
+	socket.on('boasVindas', data => {
+		// Só será mostrado no console do servidor
+		console.log('EXECUTANDO EVENTO DE BOAS VINDAS!')
+		console.log(data)
+	})
+
+	socket.on('palavra', data => {
+		console.log(data)
+		// Emite um evento do servidor para o cliente.
+		socket.emit('resultado', `${ data } - Guia do Programador.`)
+	})
 })
 
 // Já que estamos utilizando o servidor HTTP nativo, não usar o app.listen.

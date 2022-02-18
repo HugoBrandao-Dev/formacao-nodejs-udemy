@@ -7,11 +7,35 @@
 	<title>Socket.IO 2.0 - Introdução</title>
 </head>
 <body>
-	<h1>Teste</h1>
+	<input type="text" id="palavra">
+	<button type="button">Enviar</button>
+	<hr>
+	<p id="resultado"></p>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
 	<script>
 		const socket = io('http://localhost:4000')
+
+		// Cria um evento para ser enviado para o servidor
+		socket.emit('boasVindas', {
+			nome: 'Tobias de Oliveira'
+		})
+		const iptPalavra = document.getElementById('palavra')
+		iptPalavra.addEventListener('input', enviar)
+
+		const btnEnviar = document.getElementsByTagName('button')[0]
+
+		function enviar() {
+			socket.emit('palavra', iptPalavra.value)
+		}
+		btnEnviar.onclick = enviar
+
+		socket.on('resultado', data => {
+			console.log(data)
+
+			let pResultado = document.getElementById('resultado')
+			pResultado.innerHTML = data
+		})
 	</script>
 </body>
 </html>
