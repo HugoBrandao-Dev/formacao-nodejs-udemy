@@ -1,0 +1,14 @@
+{
+  "name": "15-mongodb-no-node-com-mongoose",
+  "version": "1.0.0",
+  "description": "Pequeno projeto para vermos o funcionamento do MongoDB com o Node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hugo da Rocha Brandão",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^6.2.2"
+  }
+}
