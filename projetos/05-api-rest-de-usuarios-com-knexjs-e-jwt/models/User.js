@@ -14,7 +14,7 @@ class User {
 
 	async findById(id) {
 		try {
-			let user = await knex.select(['name', 'email', 'role'])
+			let user = await knex.select(['id', 'name', 'email', 'role'])
 														.where({id: id})
 														.table('users')
 			return user.length ? user[0] : undefined
