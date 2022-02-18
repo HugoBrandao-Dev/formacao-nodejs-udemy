@@ -16,6 +16,11 @@
 	<script>
 		const socket = io('http://localhost:4000')
 
+		// Evento de desconexão
+		socket.on('disconnect', () => {
+			console.log('Desconectado')
+		})
+
 		// Cria um evento para ser enviado para o servidor
 		socket.emit('boasVindas', {
 			nome: 'Tobias de Oliveira'

@@ -34,6 +34,11 @@ io.on('connection', socket => {
 		// Emite um evento do servidor para o cliente.
 		socket.emit('resultado', `${ data } - Guia do Programador.`)
 	})
+
+	// Faz a disconexão
+	socket.on('disconnect', data => {
+		console.log(`${ socket.id } se disconectou.`)
+	})
 })
 
 // Já que estamos utilizando o servidor HTTP nativo, não usar o app.listen.
