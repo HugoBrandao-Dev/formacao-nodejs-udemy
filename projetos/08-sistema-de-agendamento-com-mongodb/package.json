@@ -1,0 +1,18 @@
+{
+  "name": "08-sistema-de-agendamento-com-mongodb",
+  "version": "1.0.0",
+  "description": "Criando uma pequena aplicacao de agendamento de tarefas, utilizando o MongoDB",
+  "main": "index.js",
+  "scripts": {
+    "test": ""
+  },
+  "author": "Hugo da Rocha Brandão",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.2",
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "fullcalendar": "^5.4.0",
+    "mongoose": "^6.2.2"
+  }
+}
