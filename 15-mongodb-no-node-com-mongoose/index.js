@@ -88,9 +88,21 @@ Article.findOne({
 */
 
 // Deletando um dado, baseado em seu ID.
+/*
 Article.findByIdAndDelete('621035da9c160ea062b6c3a3').
 	then(() => {
 		console.log('Documento deletado com sucesso.')
+	})
+	.catch(error => {
+		console.log(error)
+	})
+*/
+
+// Atualizando um documento, baseando-se no seu ID.
+Article.findByIdAndUpdate('62103badbf8c480602b9bc78', {
+	author: 'Jeremias de Oliveira'
+}).then(() => {
+		console.log('Documento atualizado com sucesso.')
 	})
 	.catch(error => {
 		console.log(error)
