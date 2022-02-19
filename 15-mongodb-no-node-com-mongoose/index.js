@@ -77,6 +77,7 @@ Article.find({
 */
 
 // Retorna somente o primeiro (One) documento que for encontrado.
+/*
 Article.findOne({
 	author: 'Victor Lima'
 }).then(article => {
@@ -84,3 +85,13 @@ Article.findOne({
 }).catch(error => {
 	consoel.log(error)
 })
+*/
+
+// Deletando um dado, baseado em seu ID.
+Article.findByIdAndDelete('621035da9c160ea062b6c3a3').
+	then(() => {
+		console.log('Documento deletado com sucesso.')
+	})
+	.catch(error => {
+		console.log(error)
+	})
