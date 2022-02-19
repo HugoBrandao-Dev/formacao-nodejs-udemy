@@ -1,0 +1,13 @@
+Alguns comandos feitos nas aulas da Seção:
+
+- Para mostrar todos os banco de dados do servidor:
+show dbs
+
+- Para usar um determinado banco de dados:
+use [NOME DO BANCO DE DADOS]
+
+- Para mostrar as coleções contidas dentro do banco de dados:
+show collections
+
+- Mostra todos os documentos cadastrados dentro do banco de dados selecionado:
+-db.[COLEÇÃO].find()
