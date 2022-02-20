@@ -13,7 +13,7 @@ app.set('view engine', 'ejs')
 mongoose.connect('mongodb://localhost:27017/agendamento')
 
 app.get('/', (req, res) => {
-	res.send('Oi!!')
+	res.render('index')
 })
 
 app.get('/cadastro', (req, res) => {
