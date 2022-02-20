@@ -22,7 +22,7 @@
 		</header>
 		<hr>
 		<main class="container">
-			<form action="formCadastrarConsulta" class="w-50 mx-auto d-flex flex-column">
+			<form method="POST" action="create" id="formCadastrarConsulta" class="w-50 mx-auto d-flex flex-column">
 				<h2>Cliente</h2>
 				<label class="mb-0">Nome:</label>
 				<input type="text" name="iptName" id="iptName" class="form-control mb-2" placeholder="Nome do paciente">
@@ -37,7 +37,7 @@
 				<input type="date" name="iptDate" id="iptDate" class="form-control mb-2">
 				<label class="mb-0">Horário:</label>
 				<input type="time" name="iptTime" id="iptTime" class="form-control mb-2">
-				<button type="button" class="btn btn-primary align-self-end">Agendar</button>
+				<button class="btn btn-primary align-self-end">Agendar</button>
 			</form>
 		</main>
 
