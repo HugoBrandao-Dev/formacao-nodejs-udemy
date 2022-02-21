@@ -41,6 +41,11 @@ app.get('/calendar', async (req, res) => {
 	res.json(appointments)
 })
 
+app.get('/appointment/:id', async (req, res) => {
+	let id = req.params.id
+	res.json({ id })
+})
+
 app.listen(4000, () => {
 	console.log('Servidor rodando...')
 })

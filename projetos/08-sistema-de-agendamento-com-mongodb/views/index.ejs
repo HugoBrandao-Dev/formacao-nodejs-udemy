@@ -23,7 +23,15 @@
 			Informa a rota, que retorna um array, e que será usado para popular o
 			calendário.
 			*/
-			events: 'calendar'
+			events: 'calendar',
+			/*
+			A função será chamada todas as vezes que clicarmos em alguma consulta,
+			passando as informações (info) do evento para essa função.
+			*/
+			eventClick: function(info) {
+				// Faz um redirecionamento para o endereço.
+				window.location.href = `/appointment/${ info.event.id }`
+			}
 		})
 		calendar.render()
 	</script>
