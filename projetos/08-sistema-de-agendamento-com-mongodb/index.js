@@ -36,6 +36,11 @@ app.post('/create', async (req, res) => {
 	}
 })
 
+app.get('/calendar', async (req, res) => {
+	let consultas = await AppointmentService.getAll(false)
+	res.json({ consultas })
+})
+
 app.listen(4000, () => {
 	console.log('Servidor rodando...')
 })

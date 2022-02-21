@@ -5,7 +5,7 @@ const appointmentSchema = new mongoose.Schema({
 	email: String,
 	cpf: String,
 	description: String,
-	data: Date,
+	date: Date,
 	time: String,
 	finished: {
 		type: Boolean,
