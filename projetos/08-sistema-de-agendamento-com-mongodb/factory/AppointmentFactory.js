@@ -24,7 +24,9 @@ class AppointmentFactory {
 		OBS: hours - 3, porque, ao passar pelo Date, a hora é convertida para o
 		formato UTC
 		*/
-		let startDate = new Date(day, month, year, hours - 3, minutes, 0, 0)
+		let startDate = new Date(year, month, day, hours, minutes, 0, 0)
+
+		console.log(startDate)
 
 		let appointment = {
 			id: simpleAppointment._id,

@@ -18,7 +18,12 @@
 		let calendar = new FullCalendar.Calendar(divCalendar, {
 			// Forma de visualização de um calendário.
 			initialView: 'dayGridMonth',
-			locale: 'pt-br'
+			locale: 'pt-br',
+			/*
+			Informa a rota, que retorna um array, e que será usado para popular o
+			calendário.
+			*/
+			events: 'calendar'
 		})
 		calendar.render()
 	</script>

@@ -38,7 +38,7 @@ app.post('/create', async (req, res) => {
 
 app.get('/calendar', async (req, res) => {
 	let appointments = await AppointmentService.getAll(false)
-	res.json({ appointments })
+	res.json(appointments)
 })
 
 app.listen(4000, () => {
