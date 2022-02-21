@@ -23,7 +23,7 @@ app.get('/cadastro', (req, res) => {
 app.post('/create', async (req, res) => {
 	let name = req.body.iptName
 	let email = req.body.iptEmail
-	let cpf = req.body.iptCpf
+	let cpf = req.body.iptCPF
 	let description = req.body.textDescription
 	let date = req.body.iptDate
 	let time = req.body.iptTime
@@ -43,7 +43,9 @@ app.get('/calendar', async (req, res) => {
 
 app.get('/appointment/:id', async (req, res) => {
 	let id = req.params.id
-	res.json({ id })
+	let eventAppointment = await AppointmentService.getAllById(id)
+
+	res.render('appointment', { appointment: eventAppointment })
 })
 
 app.listen(4000, () => {

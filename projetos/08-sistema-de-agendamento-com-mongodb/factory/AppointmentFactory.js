@@ -26,8 +26,6 @@ class AppointmentFactory {
 		*/
 		let startDate = new Date(year, month, day, hours, minutes, 0, 0)
 
-		console.log(startDate)
-
 		let appointment = {
 			id: simpleAppointment._id,
 			title: `${ simpleAppointment.name } - ${ simpleAppointment.description }`,

@@ -40,6 +40,15 @@ class AppointmentServices {
 			return formattedAppointments
 		}
 	}
+
+	async getAllById(id) {
+		try {
+			let eventAppointment = await AppointmentModel.findOne({ '_id': id })
+			return eventAppointment
+		} catch (e) {
+			console.log(e)
+		}
+	}
 }
 
 module.exports = new AppointmentServices()
