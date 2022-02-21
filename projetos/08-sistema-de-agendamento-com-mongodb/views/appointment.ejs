@@ -24,7 +24,10 @@
 			<h2>Serviço:</h2>
 			<p class="d-flex flex-column"><strong>Descrição</strong><%= appointment.description %></p>
 			<% if (!appointment.finished) { %>
-				<button type="button" class="btn btn-outline-info">Finalizar consulta</button>
+				<form method="POST" action="/finish">
+					<input type="hidden" name="iptId" value="<%= appointment._id %>">
+					<button type="submit" class="btn btn-outline-info">Finalizar consulta</button>
+				</form>
 			<% } %>
 		</main>
 

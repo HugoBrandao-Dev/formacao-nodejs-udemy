@@ -49,6 +49,18 @@ class AppointmentServices {
 			console.log(e)
 		}
 	}
+
+	async finish(id) {
+		try {
+			await AppointmentModel.findByIdAndUpdate(id, {
+				finished: true
+			})
+			return true
+		} catch(e) {
+			console.log(e)
+			return false
+		}
+	}
 }
 
 module.exports = new AppointmentServices()

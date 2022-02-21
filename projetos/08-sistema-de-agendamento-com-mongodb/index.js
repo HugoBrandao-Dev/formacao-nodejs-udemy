@@ -48,6 +48,16 @@ app.get('/appointment/:id', async (req, res) => {
 	res.render('appointment', { appointment: eventAppointment })
 })
 
+app.post('/finish', async (req, res) => {
+	let id = req.body.iptId
+	let result = await AppointmentService.finish(id)
+	if (result) {
+		res.redirect('/')
+	} else {
+		res.redirect(`/appointment/${ id }`)
+	}
+})
+
 app.listen(4000, () => {
 	console.log('Servidor rodando...')
 })
