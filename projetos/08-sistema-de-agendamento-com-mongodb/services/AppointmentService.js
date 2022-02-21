@@ -1,5 +1,6 @@
 const appointment = require('../models/Appointment')
 const mongoose = require('mongoose')
+const AppointmentFactory = require('../factory/AppointmentFactory')
 
 const AppointmentModel = mongoose.model('Appointment', appointment)
 
@@ -27,7 +28,16 @@ class AppointmentServices {
 		if (showFinished) {
 			return await AppointmentModel.find()
 		} else {
-			return await AppointmentModel.find({'finished': false})
+			let appointmentsRaw = await AppointmentModel.find({'finished': false})
+			let formattedAppointments = []
+
+			appointmentsRaw.forEach(appointment => {
+				if (appointment.date) {
+					formattedAppointments.push(AppointmentFactory.build(appointment))
+				}
+			})
+
+			return formattedAppointments
 		}
 	}
 }
