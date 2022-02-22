@@ -11,3 +11,6 @@ show collections
 
 - Mostra todos os documentos cadastrados dentro do banco de dados selecionado:
 -db.[COLEÇÃO].find()
+
+- Exclui todos os documentos dentro de uma determinada Collection.
+-db.[COLELÇÃO].remove({})
