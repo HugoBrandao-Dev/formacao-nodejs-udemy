@@ -71,6 +71,15 @@ app.get('/searchResult', async (req, res) => {
 	res.render('list', { result })
 })
 
+// 5 minutos
+const pollTime = 5 * 60000
+
+setInterval(async () => {
+
+	await AppointmentService.sendNotification()
+
+}, pollTime)
+
 app.listen(4000, () => {
 	console.log('Servidor rodando...')
 })

@@ -2,6 +2,9 @@ const appointment = require('../models/Appointment')
 const mongoose = require('mongoose')
 const AppointmentFactory = require('../factory/AppointmentFactory')
 
+// Biblioteca node para o envio de email
+const mailer = require('nodemailer')
+
 const AppointmentModel = mongoose.model('Appointment', appointment)
 
 class AppointmentServices {
@@ -76,6 +79,56 @@ class AppointmentServices {
 		} catch (error) {
 			console.log(error)
 			return []
+		}
+	}
+
+	/*
+	OBS: VERIFICAR SE HÁ CLIENTES, CUJAS CONSULTAS ESTÃO MARCADAS PARA 
+	MENOS (<=) DE UMA HORA, CADASTRADOS NO BANCO DE DADOS.
+	*/
+	async sendNotification() {
+		try {
+			let result = await this.getAll(false)
+
+			// Conexão com o MailTrap
+			const transporter = mailer.createTransport({
+				// Todas as informações foram pegas do mailtrap
+				host: 'smtp.mailtrap.io',
+				port: 25,
+				auth: {
+					user: '669ebe13184c10',
+					pass: '989cc029f14e5b'
+				}
+			})
+
+			result.forEach(async (appo) => {
+				// Pega a hora cadastrada, convertida em milissegundos
+				let date = appo.start.getTime()
+				let hourMili = 60 * 60 * 1000
+
+				// Pega o horário atual do sistema, em milissegundos
+				let gap = date - Date.now()
+
+				/*
+				Verifica se há uma hora ou menos de diferença e, em seguida, caso
+				haja, será inviada um notificação para o cliente.
+				*/
+				if (gap <= hourMili) {
+					if (!appo.notified) {
+						transporter.sendMail({
+							// Os valores DEVEM ter essas estruturas (esqueleto).
+							from: 'Exemplo: <exemplo@exemplo.com>',
+							to: appo.email,
+							subject: 'Sua consulta vai acontecer em breve (1h), não se esqueça!!.'
+						})
+						await AppointmentModel.findByIdAndUpdate(appo.id, {
+							notified: true
+						})
+					}
+				}
+			})
+		} catch (e) {
+			console.log(e)
 		}
 	}
 }

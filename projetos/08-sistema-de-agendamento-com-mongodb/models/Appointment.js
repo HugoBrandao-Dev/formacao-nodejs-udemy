@@ -10,6 +10,10 @@ const appointmentSchema = new mongoose.Schema({
 	finished: {
 		type: Boolean,
 		default: false
+	},
+	notified: {
+		type: Boolean,
+		default: false
 	}
 })
 

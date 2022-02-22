@@ -31,7 +31,9 @@ class AppointmentFactory {
 			title: `${ simpleAppointment.name } - ${ simpleAppointment.description }`,
 			start: startDate,
 			// Não é evento que tem finalização
-			end: startDate
+			end: startDate,
+			email: simpleAppointment.email,
+			notified: simpleAppointment.notified
 		}
 
 		return appointment
