@@ -58,6 +58,11 @@ app.post('/finish', async (req, res) => {
 	}
 })
 
+app.get('/list', async (req, res) => {
+	let allAppointments = await AppointmentService.getAll(true)
+	res.render('list', { allAppointments })
+})
+
 app.listen(4000, () => {
 	console.log('Servidor rodando...')
 })
