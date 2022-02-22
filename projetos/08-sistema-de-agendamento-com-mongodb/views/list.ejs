@@ -15,7 +15,7 @@
 			<h1>Consultas</h1>
 		</header>
 		<main class="container">
-			<form action="" class="d-flex align-items-end my-3">
+			<form method="GET" action="/searchResult" class="d-flex align-items-end my-3">
 				<label>Cliente:</label>
 				<input type="search" name="iptSearch" placeholder="Busca por email ou CPF do cliente" class="form-control w-50 mx-2">
 				<button type="submit" name="btnBuscar" class="btn btn-primary">Buscar</button>
@@ -31,7 +31,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<% allAppointments.forEach(appointment => { %>
+					<% result.forEach(appointment => { %>
 						<tr>
 							<td><%= appointment.name %></td>
 							<td><%= appointment.cpf %></td>

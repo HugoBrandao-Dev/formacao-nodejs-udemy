@@ -59,8 +59,16 @@ app.post('/finish', async (req, res) => {
 })
 
 app.get('/list', async (req, res) => {
-	let allAppointments = await AppointmentService.getAll(true)
-	res.render('list', { allAppointments })
+	let result = await AppointmentService.getAll(true)
+	res.render('list', { result })
+})
+
+app.get('/searchResult', async (req, res) => {
+	// Como o formulário envia informações via GET, os paramatros ficam dentro de req.query
+	let search = req.query.iptSearch
+	let result = await AppointmentService.search(search)
+	console.log(result)
+	res.render('list', { result })
 })
 
 app.listen(4000, () => {

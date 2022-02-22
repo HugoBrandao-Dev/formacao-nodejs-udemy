@@ -28,7 +28,7 @@ class AppointmentServices {
 		if (showFinished) {
 			return await AppointmentModel.find()
 		} else {
-			let appointmentsRaw = await AppointmentModel.find({'finished': false})
+			let appointmentsRaw = await AppointmentModel.find({ 'finished': false })
 			let formattedAppointments = []
 
 			appointmentsRaw.forEach(appointment => {
@@ -56,9 +56,26 @@ class AppointmentServices {
 				finished: true
 			})
 			return true
-		} catch(e) {
+		} catch (e) {
 			console.log(e)
 			return false
+		}
+	}
+
+	async search(query) {
+		try {
+			/*
+			Faz a busca por documentos que tenham dados EXATAMENTE IGUAIS 
+			ao query passado.
+			*/
+			let result = await AppointmentModel.find().or([
+				{ email: query },
+				{ cpf: query }
+			])
+			return result
+		} catch (error) {
+			console.log(error)
+			return []
 		}
 	}
 }
