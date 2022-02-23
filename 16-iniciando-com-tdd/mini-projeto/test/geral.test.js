@@ -18,7 +18,7 @@ test('A aplicação deve responder na porta 4000.', () => {
 test('Deve retornar 200|bege|beige como resposta.', () => {
 	return request.get('/corFavorita/tobias').then(res => {
 
-		// Faz duas verificações para a validação (deve passar nos dois testes).
+		// Faz três verificações para a validação (deve passar nos três testes).
 		expect(res.statusCode).toEqual(200)
 		expect(res.body.corFavorita).toEqual('bege')
 		expect(res.body.favoriteColor).toEqual('beige')
