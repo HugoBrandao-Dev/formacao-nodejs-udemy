@@ -50,3 +50,9 @@ Na aula "Importando imagens" do Capítulo referente ao projeto 04 (Pokedex),
 o professor utilizou uma imagem própria (do Guia do Programador) de banner,
 e não disponibilizou essa mesma para download, sendo assim, foi utilizada 
 a imagem "logo.png" do proprio projeto base do Vue JS para substituí-la.
+
+Na aula "Preparando a base" do Capítulo referente ao projeto 09 (sistema de
+compartilhamento de Imagens com TDD e MongoDB), o professor usa o método fail,
+para capturar erros que possam acontecer durante testes em requisições. Porém,
+ao realizar este mesmo procedimento, me foi mostrado um ReferenceError, 
+dizendo que o fail não está definido.

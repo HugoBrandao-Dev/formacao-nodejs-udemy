@@ -4,7 +4,7 @@
   "description": "Sistema de compartilhamento de imagens com TDD e MongoDB.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "Hugo da Rocha Brandão",
   "license": "ISC",
