@@ -1,0 +1,14 @@
+{
+  "name": "mini-projeto",
+  "version": "1.0.0",
+  "description": "Pequeno projeto para se estudar Jest, na pratica.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hugo da Rocha Brandão",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^27.5.1"
+  }
+}
