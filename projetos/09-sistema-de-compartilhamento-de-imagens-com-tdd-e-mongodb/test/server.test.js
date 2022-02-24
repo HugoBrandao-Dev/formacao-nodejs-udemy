@@ -6,6 +6,6 @@ const request = superTest(app)
 test('A aplicação deve responder na porta 4000', () => {
 	return request.get('/')
 		.then(res => {
-			expect(res.statusCode).toEqual(404)
+			expect(res.statusCode).toEqual(200)
 		})
 })
