@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<style>
+		form {
+			width: 40%;
+			margin: 0 auto;
+		}
+		form fieldset {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+		}
+		.input {
+			margin-bottom:10px;
+		}
+		#btnEnviar {
+			align-self: flex-end;
+		}
+	</style>
+
+	<title>Upload de arquivos com Express JS</title>
+</head>
+<body>
+	<h1>Upload de arquivos com Express JS</h1>
+
+	<!-- O atributo enctype é necessário para o envio de arquivos -->
+	<form method="POST" action="upload" enctype="multipart/form-data">
+		<fieldset>
+			<legend>Envio de arquivo</legend>
+			<div class="input">
+				<label>Arquivo: </label>
+				<input type="file" name="iptFile" id="iptFile">
+			</div>
+			<button type="submit" id="btnEnviar">Enviar</button>
+		</fieldset>
+	</form>
+</body>
+</html>
