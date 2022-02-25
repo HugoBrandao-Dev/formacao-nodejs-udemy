@@ -56,3 +56,13 @@ compartilhamento de Imagens com TDD e MongoDB), o professor usa o método fail,
 para capturar erros que possam acontecer durante testes em requisições. Porém,
 ao realizar este mesmo procedimento, me foi mostrado um ReferenceError, 
 dizendo que o fail não está definido.
+
+Decidi por não fazer a seção 30 "Projeto 09 - Sistema de compartilhamento de 
+imagens com TDD e MongoDB", apenas assistir, devido as várias mudanças ocorridas
+dentro das bibliotecas usadas, entre a versão atualmente disponível e a versão
+usada pelo professor.
+
+Decidi por não fazer a seção 31 "Mercado Pago + NodeJS", apenas assistir,
+devido as burocracias que existem na criação de conta e as dificuldades
+em fazer um simples login no sistema do Mercado Pago, tanto no app quanto
+no próprio site, atualmente.
