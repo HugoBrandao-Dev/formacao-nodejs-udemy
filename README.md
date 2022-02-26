@@ -70,3 +70,8 @@ no próprio site, atualmente.
 Decidi por não replicar a aula 402 - Envio de Email com Node da seção 32 - 
 Solicitações de alunos, porque o professor usa uma ferramenta trial paga
 (embler) como servidor de envio de mensagem.
+
+A aplicação das aulas:
+404 - Express locals, variáveis globais no Node.js
+406 - Favicon no Node.js
+Estão juntas na pasta 03-express-locals-variaveis-globais-no-nodejs

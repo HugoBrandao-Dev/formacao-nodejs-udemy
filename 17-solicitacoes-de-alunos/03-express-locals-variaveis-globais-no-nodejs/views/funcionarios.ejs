@@ -1,0 +1,16 @@
+<%- include('partials/html-start.ejs') %>
+<body>
+	<%- include('partials/header.ejs') %>
+
+	<main class="container">
+		<h1>Funcionários</h1>
+		<h2>Líder: <%= NOME %></h2>
+		<ol>
+			<% FUNCIONARIOS.forEach(func => { %>
+				<li><%= func %></li>
+			<% }) %>
+		</ol>
+	</main>
+
+	<%- include('partials/html-end.ejs') %>
+</body>
