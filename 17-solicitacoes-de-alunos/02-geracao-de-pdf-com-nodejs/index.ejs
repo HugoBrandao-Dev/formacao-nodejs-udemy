@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Gerando arquivo PDF com Node.js</title>
+	<style>
+		header h1 {
+			color: red;
+		}
+		main p span {
+			color: blue;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<h1>Gerando arquivo PDF com Node.js</h1>
+	</header>	
+	<main>
+		<h2>Formação Node.js</h2>
+		<p><span>Professor: </span>Victor Lima.</p>
+		<p><span>Aluno: </span><%= aluno.nome %>.</p>
+		<p><span>Email: </span><%= aluno.email %></p>
+		<img src="https://picsum.photos/200" alt="Imagem da Lorem Picsum" title="Lorem Picsum">
+	</main>
+</body>
+</html>
