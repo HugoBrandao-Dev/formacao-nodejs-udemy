@@ -66,3 +66,7 @@ Decidi por não fazer a seção 31 "Mercado Pago + NodeJS", apenas assistir,
 devido as burocracias que existem na criação de conta e as dificuldades
 em fazer um simples login no sistema do Mercado Pago, tanto no app quanto
 no próprio site, atualmente.
+
+Decidi por não replicar a aula 402 - Envio de Email com Node da seção 32 - 
+Solicitações de alunos, porque o professor usa uma ferramenta trial paga
+(embler) como servidor de envio de mensagem.
