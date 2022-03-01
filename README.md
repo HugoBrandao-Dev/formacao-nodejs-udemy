@@ -3,7 +3,7 @@ Plataforma: Udemy;
 Curso: Formação Node.JS;
 Professor: Victor Lima;
 Tipo de ensino: Online;
-Carga horária: 50h e 30m.
+Carga horária: 50h.
 
 ## Observações
 A aula 01 do capítulo 3 (Fundamentos do Express.js), contém todos os assuntos
