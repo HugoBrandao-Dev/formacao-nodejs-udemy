@@ -26,4 +26,6 @@ uma vez e depois podemos apagar ou comentar.
 Category.sync({ force: true })
 */
 
+Category.sync({ force: false })
+
 module.exports = Category
