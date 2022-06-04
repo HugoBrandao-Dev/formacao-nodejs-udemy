@@ -45,4 +45,6 @@ uma vez e depois podemos apagar ou comentar.
 Article.sync({ force: true })
 */
 
+Article.sync({ force: false })
+
 module.exports = Article
