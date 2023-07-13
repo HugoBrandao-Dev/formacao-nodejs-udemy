@@ -28,6 +28,10 @@ app.get('/', function(req, res) {
 
 app.post('/user', async function(req, res) {
   try {
+    if (!req.body.name || !req.body.email || !req.body.password) {
+      res.sendStatus(400)
+      return
+    }
     let newUser = new User({
       name: req.body.name,
       email: req.body.email,
