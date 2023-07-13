@@ -57,10 +57,24 @@ para capturar erros que possam acontecer durante testes em requisições. Porém
 ao realizar este mesmo procedimento, me foi mostrado um ReferenceError, 
 dizendo que o fail não está definido.
 
-Decidi por não fazer a seção 30 "Projeto 09 - Sistema de compartilhamento de 
-imagens com TDD e MongoDB", apenas assistir, devido as várias mudanças ocorridas
-dentro das ferramentas usadas, entre as versões atualmente disponíveis e a versões
-usadas pelo professor.
+Para o "Projeto 09 - Sistema de compartilhamento de imagens com TDD e MongoDB"
+substitui a ferramenta do MongoDB local pelo MongoDB Atlas (Cloud), devido ao
+fato deu estar utilizando Windows 7 32bits e não existir instalador para esse
+sistema operacional.
+
+Durante a realização do "Projeto 09 - Sistema de compartilhamento de imagens com TDD e MongoDB", ocorreu um erro entre o MongoDB e o Jest, onde a conexão era encerrada ainda durante processos de testes. Para corrigir isso, escrevemos o seguinte código, em cada um dos arquivos de teste:
+```js
+  import mongoose = require('mongoose')
+
+  // No escopo principal
+  afterAll(async function() {
+    try {
+      await mongoose.connection.close()
+    } catch (error) {
+      console.error(error)
+    }
+  })
+```
 
 Decidi por não fazer a seção 31 "Mercado Pago + NodeJS", apenas assistir,
 devido as burocracias que existem na criação de conta e as dificuldades

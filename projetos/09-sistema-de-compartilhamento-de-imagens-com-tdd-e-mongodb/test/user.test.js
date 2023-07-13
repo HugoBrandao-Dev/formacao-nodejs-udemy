@@ -1,6 +1,7 @@
 let app = require('../src/app')
 let supertest = require('supertest')
 let request = supertest(app)
+let mongoose = require('mongoose')
 
 describe("Deve cadastrar um usuário com sucesso", function() {
   test("Deve cadastrar um usuário com sucesso.", function() {
@@ -33,4 +34,12 @@ describe("Deve cadastrar um usuário com sucesso", function() {
         fail(error)
       })
   })
+})
+
+afterAll(async function() {
+  try {
+    await mongoose.connection.close()
+  } catch (error) {
+    console.error(error)
+  }
 })
