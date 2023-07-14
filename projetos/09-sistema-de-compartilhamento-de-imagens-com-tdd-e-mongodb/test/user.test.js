@@ -76,6 +76,19 @@ describe("Deve cadastrar um usuário com sucesso", function() {
   })
 })
 
+describe("Autenticação", function() {
+  test("Deve me retornar um token quando logar.", function() {
+    return request.post('/auth').send({ email: mainUser.email, password: mainUser.password })
+      .then(function(res) {
+        expect(res.statusCode).toEqual(200)
+        expect(res.body.token).toBeDefined()
+      })
+      .catch(function(error) {
+        fail(error)
+      })
+  })
+})
+
 afterAll(async function() {
   try {
     await request.delete(`/user/${ mainUser.email }`)
