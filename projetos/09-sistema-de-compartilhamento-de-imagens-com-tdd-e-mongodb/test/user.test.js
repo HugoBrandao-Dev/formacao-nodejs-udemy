@@ -87,6 +87,17 @@ describe("Autenticação", function() {
         fail(error)
       })
   })
+
+  test("Deve impedir que um usuario não cadastrado se logue", function() {
+    return request.post('/auth').send({ email: 'tobia@gmail.com', password: mainUser.password })
+      .then(function(res) {
+        expect(res.statusCode).toEqual(403)
+        expect(res.body.errors.email).toBe("E-mail não cadastrado.")
+      })
+      .catch(function(error) {
+        fail(error)
+      })
+  })
 })
 
 afterAll(async function() {
