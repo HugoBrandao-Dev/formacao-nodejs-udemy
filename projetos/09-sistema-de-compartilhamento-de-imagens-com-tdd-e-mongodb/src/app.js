@@ -58,4 +58,13 @@ app.post('/user', async function(req, res) {
   }
 })
 
+app.delete('/user/:email', async function(req, res) {
+  try {
+    await User.deleteOne({ email: req.params.email })
+    res.sendStatus(200)
+  } catch (error) {
+    console.error(error)
+  }
+})
+
 module.exports = app
