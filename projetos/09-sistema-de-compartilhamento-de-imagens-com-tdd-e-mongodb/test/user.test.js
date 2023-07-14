@@ -3,6 +3,18 @@ let supertest = require('supertest')
 let request = supertest(app)
 let mongoose = require('mongoose')
 
+let mainUser = {
+  name: 'Tobias de Oliveira',
+  email: 'tobias@gmail.com',
+  password: 'tobias321'
+}
+
+beforeAll(() => {
+  return request.post('/user').send(mainUser)
+    .then(function() {})
+    .catch(function(error) { console.error(error) })
+})
+
 describe("Deve cadastrar um usuário com sucesso", function() {
   test("Deve cadastrar um usuário com sucesso.", function() {
     let time = Date.now()
@@ -66,6 +78,7 @@ describe("Deve cadastrar um usuário com sucesso", function() {
 
 afterAll(async function() {
   try {
+    await request.delete(`/user/${ mainUser.email }`)
     await mongoose.connection.close()
   } catch (error) {
     console.error(error)
