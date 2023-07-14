@@ -1,6 +1,7 @@
 let express = require('express')
 let app = express()
 let mongoose = require('mongoose')
+let bcrypt = require('bcrypt')
 
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
@@ -40,10 +41,14 @@ app.post('/user', async function(req, res) {
       return
     }
 
+    let password = req.body.password
+    let salt = await bcrypt.genSalt(10)
+    let hash = await bcrypt.hash(password, salt)
+
     let newUser = new User({
       name: req.body.name,
       email: req.body.email,
-      senha: req.body.password
+      password: hash
     })
 
     await newUser.save()
