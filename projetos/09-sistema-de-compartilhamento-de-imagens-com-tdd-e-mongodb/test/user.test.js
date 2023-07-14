@@ -98,6 +98,17 @@ describe("Autenticação", function() {
         fail(error)
       })
   })
+
+  test("Deve impedir que um usuario, com senha incorreta, logue.", function() {
+    return request.post('/auth').send({ email: 'tobias@gmail.com', password: 'tobias123' })
+      .then(function(res) {
+        expect(res.statusCode).toEqual(403)
+        expect(res.body.errors.password).toBe("Senha incorreta.")
+      })
+      .catch(function(error) {
+        fail(error)
+      })
+  })
 })
 
 afterAll(async function() {
