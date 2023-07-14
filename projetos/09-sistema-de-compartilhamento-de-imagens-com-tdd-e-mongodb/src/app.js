@@ -60,7 +60,7 @@ app.post('/user', async function(req, res) {
   }
 })
 
-app.post('/auth', async function(req, res) {
+app.post('/auth', async function(req, res, next) {
   try {
     let { email, password } = req.body
 
@@ -68,6 +68,12 @@ app.post('/auth', async function(req, res) {
     if (!user) {
       res.status(403)
       res.json({ errors: { email: 'E-mail não cadastrado.' } })
+    }
+
+    let isPasswordRight = await bcrypt.compare(password, user.password)
+    if (!isPasswordRight) {
+      res.status(403)
+      res.json({ errors: { password: 'Senha incorreta.' } })
     }
 
     jwt.sign({ email }, JWTSecret, {
@@ -80,7 +86,7 @@ app.post('/auth', async function(req, res) {
       res.json({ token })
     })
   } catch (error) {
-    res.sendStatus(500)
+    return next(error)
   }
 })
 
