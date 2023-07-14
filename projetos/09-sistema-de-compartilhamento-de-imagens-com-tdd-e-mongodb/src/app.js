@@ -2,6 +2,8 @@ let express = require('express')
 let app = express()
 let mongoose = require('mongoose')
 let bcrypt = require('bcrypt')
+let jwt = require('jsonwebtoken')
+let JWTSecret = 'oiuqwrklsdflkjqwer'
 
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
@@ -53,6 +55,23 @@ app.post('/user', async function(req, res) {
 
     await newUser.save()
     res.json({email: req.body.email})
+  } catch (error) {
+    res.sendStatus(500)
+  }
+})
+
+app.post('/auth', async function(req, res) {
+  try {
+    let { email, password } = req.body
+    jwt.sign({ email }, JWTSecret, {
+      expiresIn: '48h',
+    }, function(error, token) {
+      if (error) {
+        res.sendStatus(500)
+        console.log(error)
+      }
+      res.json({ token })
+    })
   } catch (error) {
     res.sendStatus(500)
   }
