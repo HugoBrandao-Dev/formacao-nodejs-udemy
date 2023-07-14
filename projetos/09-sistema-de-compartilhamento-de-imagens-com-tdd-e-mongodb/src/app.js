@@ -63,6 +63,13 @@ app.post('/user', async function(req, res) {
 app.post('/auth', async function(req, res) {
   try {
     let { email, password } = req.body
+
+    let user = await User.findOne({ email })
+    if (!user) {
+      res.status(403)
+      res.json({ errors: { email: 'E-mail não cadastrado.' } })
+    }
+
     jwt.sign({ email }, JWTSecret, {
       expiresIn: '48h',
     }, function(error, token) {
