@@ -1,0 +1,11 @@
+{
+  "name": "10-mercado-pago-nodejs",
+  "version": "1.0.0",
+  "description": "Aplicação para pagamentos utilizando Mercado Pago.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hugo da Rocha Brandão",
+  "license": "ISC"
+}
